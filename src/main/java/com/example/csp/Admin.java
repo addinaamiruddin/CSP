@@ -1,71 +1,112 @@
 package com.example.csp;
 
-import java.util.List;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
-public class Admin extends User implements ICourseOperation {
+// Admin is the subclass of user (INHERITANCE).
+// It contains specific functionality and privileges related to managing the system.
+public class Admin extends User {
     private String adminId;
-    private AdminOperation adminOperation;
+    private static Scanner input = new Scanner(System.in);
+    private static Admin instance;
 
-    public Admin() {
-        this.adminOperation = new AdminOperation();
-    }
-    public void setAdminId(int administratorId) {
-        this.adminId = administratorId;
-    }
-    public Admin(String username, String password, String emailAddress, int phoneNumber, AddressInfo addressInfo,
-                 String adminId) {
+    // set it to private to ensure that only one instance of the Admin class is
+    // created.
+    private Admin(String username, String password, String emailAddress, int phoneNumber,
+                  AddressInfo addressInfo) {
         super(username, password, emailAddress, phoneNumber, addressInfo);
-        this.adminId = adminId;
-        this.adminOperation = new AdminOperation();
     }
 
-    public Admin(String username, String password) {
-        super(username, password);
-        this.adminOperation = new AdminOperation();
+    // this one is for dummy
+    public Admin(String adminId, String string, String string2, String string3, int i,
+                 AddressInfo address) {
+        super(string, string2, string3, i, address);
+        this.adminId = adminId;
+    }
+
+    // SINGLETON PATTERN is used to ensure that there is only one admin object
+    // being manipulated throughout the application, and to prevent multiple
+    // instances of the admin object from being created.
+    public static Admin getInstance(String username, String password, String emailAddress, int phoneNumber,
+                                    AddressInfo addressInfo) {
+        if (instance == null) {
+            instance = new Admin(username, password, emailAddress, phoneNumber, addressInfo);
+        }
+        return instance;
     }
 
     public String getAdminId() {
         return adminId;
     }
 
-    private class AdminOperation extends CourseOperation {
+    @Override
+    void displayUserDashboard(User loggedInUser) {
+        AdminDashboardDisplayStrategy adminDashboard = new AdminDashboardDisplayStrategy();
+        System.out.print("\033[H\033[2J");
+        System.out.println("===== ADMIN DASHBOARD =====");
+        System.out.println("Welcome " + loggedInUser.getUsername() + "!");
 
-        // what about
-        @Override
-        public void addCourse(Course selectedCourse, User loggedInUser) {
-            try (Scanner input = new Scanner(System.in)) {
+        System.out.println("\n1. MANAGE PERSONAL INFORMATION");
+        System.out.println("2. VIEW STUDENT LIST");
+        System.out.println("3. MANAGE COURSES");
+        System.out.println("4. LOGOUT");
 
-                String courseName = input.nextLine();
+        System.out.print("\nChoose 1 : ");
 
-                Course c = new Course(courseName);
-                Course.addCourse(c);
-
-                List<Course> allCourses = Course.getAllCourses();
-
-                for (Course course : allCourses) {
-                    System.out.println(course.getCourseName());
-                }
-                System.out.println("\nCourse " + c.getCourseName() + " has been created successfdeully.");
-
-                System.out.print("\nPress 0 to return : ");
-                int selection = input.nextInt();
-                if (selection == 0)
-                    manageCourse(c, loggedInUser);
-            } catch (
-
-                    NumberFormatException e) {
-                e.printStackTrace();
-            }
+        int choice = 0;
+        try {
+            choice = input.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input, please enter a number.");
+            return;
         }
 
+        switch (choice) {
+            case 1:
+                adminDashboard.adminInformation(loggedInUser);
+                break;
+            case 2:
+                // view student list;
+                break;
+            case 3:
+                adminDashboard.manageCourse(loggedInUser);
+                break;
+            case 4:
+                adminDashboard.userLogout(loggedInUser);
+                break;
+            default:
+                System.out.println("Invalid option, please try again.");
+                adminDashboard.adminDashboard(loggedInUser);
+                return;
+        }
     }
 
     @Override
-    public void unregisteredFromCourse(Course course, User loggedInUser) {
-        System.out.println("unregisteredFromCourse admin is working...");
+    void displayUserInformation(User loggedInUser) {
+        System.out.print("\033[H\033[2J");
+        AdminDashboardDisplayStrategy adminStrategy = new AdminDashboardDisplayStrategy();
+        try (Scanner input = new Scanner(System.in)) {
+            System.out.println("===== ADMIN INFORMATION =====");
+            System.out.println("Admin Name  : " + loggedInUser.getUsername());
+            System.out.println("Password      : " + loggedInUser.getPassword());
+            System.out.println("Admin ID    : " + ((Admin) loggedInUser).getAdminId());
+            System.out.println("Email Address : " + loggedInUser.getEmailAddress());
+            System.out.println("Phone Number  : " + loggedInUser.getPhoneNumber());
 
+            System.out.println("\n===== ADMIN ADDRESS INFORMATION =====");
+            System.out.println("Street       : " + loggedInUser.getAddressInfo().getStreet());
+            System.out.println("City         : " + loggedInUser.getAddressInfo().getCity());
+            System.out.println("State        : " + loggedInUser.getAddressInfo().getState());
+            System.out.println("Postal Code  : " + loggedInUser.getAddressInfo().getPostalCode());
+            System.out.println("Country      : " + loggedInUser.getAddressInfo().getCountry());
+
+            System.out.print("\nPress 0 to return : ");
+            int selection = input.nextInt();
+            if (selection == 0)
+                adminStrategy.adminDashboard(loggedInUser);
+        }
     }
-
 }
+
 
 

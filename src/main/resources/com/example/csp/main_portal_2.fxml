@@ -18,7 +18,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Button layoutX="862.0" layoutY="18.0" mnemonicParsing="false" style="-fx-background-color: navy;" text="FACILITY" textFill="WHITE">
+            <Button layoutX="862.0" layoutY="18.0" mnemonicParsing="false" style="-fx-background-color: navy;" text="ADMIN" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -108,6 +108,6 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <Button onAction="#switchToMainPortal1" layoutX="15.0" layoutY="285.0" mnemonicParsing="false" prefHeight="11.0" prefWidth="31.0" style="-fx-shape: &quot;M150 0 L75 200 L225 200 Z&quot;; -fx-rotate: 270; -fx-background-color: lightgrey;" />
+      <Button layoutX="15.0" layoutY="285.0" mnemonicParsing="false" onAction="#switchToMainPortal1" prefHeight="11.0" prefWidth="31.0" style="-fx-shape: &quot;M150 0 L75 200 L225 200 Z&quot;; -fx-rotate: 270; -fx-background-color: lightgrey;" />
    </children>
 </AnchorPane>

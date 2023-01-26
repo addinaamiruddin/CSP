@@ -1,5 +1,9 @@
 package com.example.csp;
 
+// The AddressInfo class is a COMPOSITION class purposely to store user address.
+// For more detailed information, please refer to the documentation report.
+// It is used to store the street name, city, state, and zip code of an address.
+// It is typically used in conjunction with other classes to provide complete address information of a user.
 public class AddressInfo {
     private String street;
     private String city;
@@ -18,29 +22,15 @@ public class AddressInfo {
     public AddressInfo() {
     }
 
-    public String getSampleAddress() {
-        String full = this.street + " " + this.city;
-        String[] words = full.split("\\s");
-        String sampleAddress = "";
-        String[] var4 = words;
-        int var5 = words.length;
-
-        for(int var6 = 0; var6 < var5; ++var6) {
-            String w = var4[var6];
-            String first = w.substring(0, 1);
-            String afterfirst = w.substring(1);
-            sampleAddress = sampleAddress + first.toUpperCase() + afterfirst + " ";
-        }
-
-        return sampleAddress;
-    }
-
+    @Override
     public String toString() {
-        return this.street + ", " + this.city + ", " + this.state + ", " + this.postalCode + ", " + this.country;
+        return "AddressInfo street = " + street + ", city = " + city + ", state = " + state + ", postalCode = "
+                + postalCode
+                + ", country = " + country;
     }
 
     public String getStreet() {
-        return this.street;
+        return street;
     }
 
     public void setStreet(String street) {
@@ -48,7 +38,7 @@ public class AddressInfo {
     }
 
     public String getCity() {
-        return this.city;
+        return city;
     }
 
     public void setCity(String city) {
@@ -56,7 +46,7 @@ public class AddressInfo {
     }
 
     public String getState() {
-        return this.state;
+        return state;
     }
 
     public void setState(String state) {
@@ -64,7 +54,7 @@ public class AddressInfo {
     }
 
     public String getPostalCode() {
-        return this.postalCode;
+        return postalCode;
     }
 
     public void setPostalCode(String postalCode) {
@@ -72,13 +62,11 @@ public class AddressInfo {
     }
 
     public String getCountry() {
-        return this.country;
+        return country;
     }
 
     public void setCountry(String country) {
         this.country = country;
     }
-
-    public void validate() {
-    }
 }
+

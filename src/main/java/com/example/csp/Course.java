@@ -1,11 +1,20 @@
 package com.example.csp;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+enum MediumOfStudy {
+    FOUNDATION,
+    DIPLOMA,
+    UNDERGRADUATE,
+    POSTGRADUATE,
+    PHD;
+}
 
-public class Course {
+// The Course class represents a course offered by the university.
+// It contains details information regarding on the course.
+// This class is used in conjunction with the courseDelegation class to manage
+// and display course information for students and faculties.
+// The logic to handle action course, add course, update course & delete course
+// is inside courseDelegation class.
+public class Course extends CourseDelegation {
     private String courseId;
     private String courseName;
     private String[] subjectTaught;
@@ -15,97 +24,200 @@ public class Course {
     private boolean scholarshipFacilities;
     private int feeStructure;
     private int maximumStudent;
-    private MediumStudy mediumStudy;
-    private Programme programme;
-    ArrayList<Course> courses = new ArrayList();
+    private MediumOfStudy mediumStudy;
 
-    public Course(String var1, String var2, String[] var3, int var4, String[] var5, String[] var6, boolean var7, int var8, int var9, MediumStudy var10) {
-        this.courseId = var1;
-        this.courseName = var2;
-        this.subjectTaught = var3;
-        this.courseDuration = var4;
-        this.employmentOpportunities = var5;
-        this.scopeForFutherStudies = var6;
-        this.scholarshipFacilities = var7;
-        this.feeStructure = var8;
-        this.maximumStudent = var9;
-        this.mediumStudy = var10;
+    private static List<Course> courses = new ArrayList<>();
+    private CourseDelegation delegation = new CourseDelegation();
+
+    public Course(String courseId, String courseName, String[] subjectTaught, int courseDuration,
+                  String[] employmentOpportunities, String[] scopeForFutherStudies, boolean scholarshipFacilities,
+                  int feeStructure, int maximumStudent, MediumOfStudy mediumStudy) {
+        this.courseId = courseId;
+        this.courseName = courseName;
+        this.subjectTaught = subjectTaught;
+        this.courseDuration = courseDuration;
+        this.employmentOpportunities = employmentOpportunities;
+        this.scopeForFutherStudies = scopeForFutherStudies;
+        this.scholarshipFacilities = scholarshipFacilities;
+        this.feeStructure = feeStructure;
+        this.maximumStudent = maximumStudent;
+        this.mediumStudy = mediumStudy;
     }
 
     public Course() {
-        Course var1 = new Course("ODN3829", "Bachelor of Science (Hons.) Intelligent Robotics", new String[]{"Data Structures", "Algorithms", "Programming Languages"}, 120, new String[]{"Masters in Computer Science", "MBA in IT"}, new String[]{"hello"}, true, 14, 120, MediumStudy.FOUNDATION);
-        Course var2 = new Course("ODN3329", "Bachelor of Engineering (Hons.) Electronics", new String[]{"Data Structures", "Algorithms", "Programming Languages"}, 120, new String[]{"Masters in Computer Science", "MBA in IT"}, new String[]{"hello"}, true, 14, 120, MediumStudy.FOUNDATION);
-        Course var3 = new Course("ODN3329", "Bachelor of Computer Science (Hons.)", new String[]{"Data Structures", "Algorithms", "Programming Languages"}, 120, new String[]{"Masters in Computer Science", "MBA in IT"}, new String[]{"hello"}, true, 14, 120, MediumStudy.FOUNDATION);
-        Course var4 = new Course("ODN3329", "Bachelor of Accounting (Hons.)", new String[]{"Data Structures", "Algorithms", "Programming Languages"}, 120, new String[]{"Masters in Computer Science", "MBA in IT"}, new String[]{"hello"}, true, 14, 120, MediumStudy.FOUNDATION);
-        Course var5 = new Course("ODN3329", "Bachelor of Business Management (Hons.)", new String[]{"Data Structures", "Algorithms", "Programming Languages"}, 120, new String[]{"Masters in Computer Science", "MBA in IT"}, new String[]{"hello"}, true, 14, 120, MediumStudy.FOUNDATION);
-        this.courses.add(var1);
-        this.courses.add(var2);
-        this.courses.add(var3);
-        this.courses.add(var4);
-        this.courses.add(var5);
     }
 
-    public Course(String var1) {
-        this.courseName = var1;
-    }
-
+    @Override
     public String toString() {
-        String var10000 = this.courseId;
-        return "courseId : " + var10000 + "\ncourseName : " + this.courseName + "\nsubjectTaught : " + Arrays.toString(this.subjectTaught) + "\ncourseDuration : " + this.courseDuration + "\nemploymentOpportunities : " + Arrays.toString(this.employmentOpportunities) + "\nscopeForFutherStudies : " + Arrays.toString(this.scopeForFutherStudies) + "\nscholarshipFacilities : " + this.scholarshipFacilities + "\nfeeStructure : " + this.feeStructure + "\nmaximumStudent : " + this.maximumStudent + "\nmediumStudy : " + this.mediumStudy + "\nprogramme : " + this.programme;
+        return "courseId : " + courseId + "\ncourseName : " + courseName + "\nsubjectTaught : "
+                + Arrays.toString(subjectTaught) + "\ncourseDuration : " + courseDuration
+                + "\nemploymentOpportunities : "
+                + Arrays.toString(employmentOpportunities) + "\nscopeForFutherStudies : "
+                + Arrays.toString(scopeForFutherStudies) + "\nscholarshipFacilities : " + scholarshipFacilities
+                + "\nfeeStructure : " + feeStructure + "\nmaximumStudent : " + maximumStudent + "\nmediumStudy : "
+                + mediumStudy;
     }
 
-    public void addCourse() {
+    public String getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public String[] getSubjectTaught() {
+        return subjectTaught;
+    }
+
+    public void setSubjectTaught(String[] subjectTaught) {
+        this.subjectTaught = subjectTaught;
+    }
+
+    public int getCourseDuration() {
+        return courseDuration;
+    }
+
+    public void setCourseDuration(int courseDuration) {
+        this.courseDuration = courseDuration;
+    }
+
+    public String[] getEmploymentOpportunities() {
+        return employmentOpportunities;
+    }
+
+    public void setEmploymentOpportunities(String[] employmentOpportunities) {
+        this.employmentOpportunities = employmentOpportunities;
+    }
+
+    public String[] getScopeForFutherStudies() {
+        return scopeForFutherStudies;
+    }
+
+    public void setScopeForFutherStudies(String[] scopeForFutherStudies) {
+        this.scopeForFutherStudies = scopeForFutherStudies;
+    }
+
+    public boolean isScholarshipFacilities() {
+        return scholarshipFacilities;
+    }
+
+    public void setScholarshipFacilities(boolean scholarshipFacilities) {
+        this.scholarshipFacilities = scholarshipFacilities;
+    }
+
+    public int getFeeStructure() {
+        return feeStructure;
+    }
+
+    public void setFeeStructure(int feeStructure) {
+        this.feeStructure = feeStructure;
+    }
+
+    public int getMaximumStudent() {
+        return maximumStudent;
+    }
+
+    public void setMaximumStudent(int maximumStudent) {
+        this.maximumStudent = maximumStudent;
+    }
+
+    public MediumOfStudy getMediumStudy() {
+        return mediumStudy;
+    }
+
+    public void setMediumStudy(MediumOfStudy mediumStudy) {
+        this.mediumStudy = mediumStudy;
+    }
+
+    public static List<Course> getCourses() {
+        return courses;
+    }
+
+    public static void setCourses(List<Course> courses) {
+        Course.courses = courses;
+    }
+
+    public static void addCourse(Course course) {
+        courses.add(course);
     }
 
     public void withdrawCourse() {
     }
 
-    public String getCourseId() {
-        return this.courseId;
+    public void createCourses() {
+        Course businessManagement = new Course("ODN3329", "Bachelor of Business Management (Hons.)",
+                new String[] { "Data Structures", "Algorithms", "Programming Languages" },
+                120,
+                new String[] { "Masters in Computer Science",
+                        "MBA in IT" },
+                new String[] { "hello" },
+                true, 14, 120, MediumOfStudy.FOUNDATION);
+
+        courses.add(businessManagement);
     }
 
-    public String getCourseName() {
-        return this.courseName;
+    public static List<Course> getAllCourses() {
+        return courses;
     }
 
-    public int getMaximumStudent() {
-        return this.maximumStudent;
-    }
-
-    public int getCourseDuration() {
-        return this.courseDuration;
-    }
-
-    public MediumStudy getMediumOfStudy() {
-        return this.mediumStudy;
-    }
-
-    public Programme getProgramme() {
-        return this.programme;
-    }
-
-    public String[] getSubjectsTaught() {
-        return this.subjectTaught;
-    }
-
-    public void displayCourseList() {
-    }
-
-    public List<Course> getAllCourses() {
-        return this.courses;
-    }
-
-    public static void printCourses(List<Course> var0) {
-        if (var0.isEmpty()) {
+    public static void printCourses(List<Course> courses) {
+        if (courses.isEmpty()) {
             System.out.println("Student has no courses yet.");
         } else {
-            int var1 = 1;
 
-            for(Iterator var2 = var0.iterator(); var2.hasNext(); ++var1) {
-                Course var3 = (Course)var2.next();
-                System.out.println("(" + var1 + ") " + var3.getCourseName());
+            int i = 1;
+            for (Course course : courses) {
+                System.out.println("(" + i + ") " + course.getCourseName());
+                i++;
             }
         }
+    }
 
+    public void displayAllCourse() {
+        // display all available course
+        List<Course> courses = Course.getAllCourses();
+
+        int i = 1;
+        for (Course course : courses) {
+            System.out.println("(" + i + ") " + course.getCourseName());
+            i++;
+        }
+    }
+
+    // This method handleCourseActions uses delegation design pattern by delegating
+    // the responsibility of handling course actions to the object referenced by the
+    // delegation variable.
+    public void handleCourseActions(User loggedInUser) {
+        delegation.handleCourseActions(loggedInUser);
+    }
+
+    // This method addOfferedCourse uses delegation design pattern by delegating
+    // the responsibility of add course actions to the object referenced by the
+    // delegation variable.
+    public void handleAddCourse(User loggedInUser) {
+        delegation.handleAddCourse(loggedInUser, this);
+    }
+
+    // This method updateOfferedCourse uses delegation design pattern by delegating
+    // the responsibility of update course actions to the object referenced by the
+    // delegation variable.
+    public void handleUpdateCourse(User loggedInUser) {
+        delegation.handleUpdateCourse(loggedInUser);
+    }
+
+    // This method removeOfferedCourse uses delegation design pattern by delegating
+    // the responsibility of delete course actions to the object referenced by the
+    // delegation variable.
+    public void handleRemoveCourse(User loggedInUser) {
+        delegation.handleRemoveCourse(loggedInUser);
     }
 }

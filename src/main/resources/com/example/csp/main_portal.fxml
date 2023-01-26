@@ -9,7 +9,7 @@
    <children>
       <AnchorPane prefHeight="62.0" prefWidth="960.0" style="-fx-border-color: black;">
          <children>
-            <Button layoutX="779.0" layoutY="18.0" mnemonicParsing="false" style="-fx-background-color: navy;" text="STUDENT" textFill="WHITE" onAction="#switchToRegister">
+            <Button layoutX="779.0" layoutY="18.0" mnemonicParsing="false" onAction="#clickStudentBtn" style="-fx-background-color: navy;" text="STUDENT" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
@@ -18,7 +18,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Button layoutX="862.0" layoutY="18.0" mnemonicParsing="false" style="-fx-background-color: navy;" text="FACILITY" textFill="WHITE" onAction="#switchToRegister">
+            <Button layoutX="862.0" layoutY="18.0" mnemonicParsing="false" onAction="#clickAdminBtn" style="-fx-background-color: navy;" text="ADMIN" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -150,8 +150,6 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <Button onAction="#switchToMainPortal2" layoutX="922.0" layoutY="285.0" mnemonicParsing="false" prefHeight="11.0"
-              prefWidth="31.0"
-              style="-fx-shape: &quot;M150 0 L75 200 L225 200 Z&quot;; -fx-rotate: 90; -fx-background-color: lightgrey;"/>
+      <Button layoutX="922.0" layoutY="285.0" mnemonicParsing="false" onAction="#switchToMainPortal2" prefHeight="11.0" prefWidth="31.0" style="-fx-shape: &quot;M150 0 L75 200 L225 200 Z&quot;; -fx-rotate: 90; -fx-background-color: lightgrey;" />
    </children>
 </AnchorPane>

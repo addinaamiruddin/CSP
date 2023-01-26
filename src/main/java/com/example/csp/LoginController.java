@@ -26,8 +26,6 @@ public class LoginController {
     User loggedInUser = null;
     List<User> listOfUsers = new ArrayList<>();
     private Label labelWarning;
-
-
     public LoginController() {
     }
 
@@ -35,20 +33,20 @@ public class LoginController {
         String inpUser = this.input_username.getText();
         String inpPass = this.input_password.getText();
 
-        for (User user : listOfUsers) {
+        // check if student is exist
+        for (Student user : listOfStudents) {
             if (user.getUsername().equals(inpUser)) {
                 if (user.getPassword().equals(inpPass)) {
                     loggedInUser = user;
-                    // check if loggedInUser is instance of Student or Admin
-                    if (loggedInUser instanceof Student) {
-                        StudDashboardController SD = new StudDashboardController(loggedInUser);
-                    } else if (loggedInUser instanceof Admin) {
-                        AdminDashboardController AD = new AdminDashboardController(loggedInUser);
-                    }
+                    studentDashboard(loggedInUser);
                     break;
                 }
+            } else {
+                System.out.println("Invalid username/password combination\n");
+                break;
             }
         }
+
         if (loggedInUser == null) {
             labelWarning.setText("Invalid username/password combination");
         }

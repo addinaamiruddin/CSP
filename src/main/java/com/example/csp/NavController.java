@@ -22,7 +22,7 @@ public class NavController {
     }
 
     public void switchToCourseInfo(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("stud_course_info.fxml"));
+        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("stud_add_course.fxml"));
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);

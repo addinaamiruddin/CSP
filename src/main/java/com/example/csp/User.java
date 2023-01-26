@@ -1,5 +1,7 @@
 package com.example.csp;
 
+// ABSTRACTION of user class is used to serve as an abstract base class for different types of users (e.g. Admin, Student) in the system.
+// It contains common properties and methods that are shared among all user types.
 public abstract class User {
     private String username;
     private String password;
@@ -7,39 +9,71 @@ public abstract class User {
     private int phoneNumber;
     private AddressInfo addressInfo;
 
-    public User(String var1, String var2, String var3, int var4, AddressInfo var5) {
-        this.username = var1;
-        this.password = var2;
-        this.emailAddress = var3;
-        this.phoneNumber = var4;
-        this.addressInfo = var5;
+    public User(String username, String password, String emailAddress, int phoneNumber, AddressInfo addressInfo) {
+        this.username = username;
+        this.password = password;
+        this.emailAddress = emailAddress;
+        this.phoneNumber = phoneNumber;
+        this.addressInfo = addressInfo;
     }
 
-    public User(String username, String emailAddress, String phoneNumber, String password) {
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
-    public User(String var1, String var2) {
-        this.username = var1;
-        this.password = var2;
+    public User() {
     }
 
     public String getUsername() {
-        return this.username;
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
-        return this.password;
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmailAddress() {
-        return this.emailAddress;
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     public int getPhoneNumber() {
-        return this.phoneNumber;
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public AddressInfo getAddressInfo() {
-        return this.addressInfo;
+        return addressInfo;
     }
+
+    public void setAddressInfo(AddressInfo addressInfo) {
+        this.addressInfo = addressInfo;
+    }
+
+    abstract void displayUserDashboard(User loggedInUser);
+
+    abstract void displayUserInformation(User loggedInUser);
+
+//    public void displayUserLogout(User loggedInUser) {
+//        System.out.println("User " + loggedInUser.getUsername() + " has been logout.");
+//        loggedInUser = null;
+//        Main.main(null);
+//    }
+
 }
+

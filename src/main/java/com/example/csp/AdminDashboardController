@@ -22,7 +22,10 @@ public class AdminDashboardController {
     private User loggedInUser;
 
     public AdminDashboardController(User loggedInUser) {
-        this.loggedInUser = loggedInUser;
+    }
+
+    public void adminDashboard(User loggedInUser) {
+        this.loggedInUser=loggedInUser;
     }
 
     public void logOut(ActionEvent event) throws IOException {

@@ -120,9 +120,7 @@ public class Registration {
             String country = input.nextLine();
             theAddress.setCountry(country);
 
-            Student newStudent = new Student(username, password, emailAddress, phoneNumber, theAddress,
-                    null,
-                    emailAddress);
+            Student newStudent = new Student(username, password, emailAddress, phoneNumber, theAddress);
             listOfUsers.add(newStudent);
 
             displayStudentPortal();
@@ -220,14 +218,14 @@ public class Registration {
 
     // send info about loggedInUser - and display info (hard coded)
     public void userInformation(User loggedInUser) {
-        loggedInUser.displayInformation(loggedInUser);
+//        loggedInUser.displayInformation(loggedInUser);
     }
 
     // send selected course and loggedInUser to manageCourse
     public void manageCourse(User loggedInUser) {
 
         if (loggedInUser instanceof Student) {
-            ((Student) loggedInUser).manageCourse(selectedCourse, loggedInUser);
+//            ((Student) loggedInUser).manageCourse(selectedCourse, loggedInUser);
         } else if (loggedInUser instanceof Admin) {
             ((Admin) loggedInUser).manageCourse(selectedCourse, loggedInUser);
         }
@@ -236,16 +234,16 @@ public class Registration {
     // send
     public void displayAddCourses(Course selectedCourse, User loggedInUser) {
         if (loggedInUser instanceof Student) {
-            ((Student) loggedInUser).displayAddCourses(selectedCourse, loggedInUser);
+//            ((Student) loggedInUser).displayAddCourses(selectedCourse, loggedInUser);
         } else if (loggedInUser instanceof Admin) {
-            ((Admin) loggedInUser).displayAddCourses(selectedCourse, loggedInUser);
+//            ((Admin) loggedInUser).displayAddCourses(selectedCourse, loggedInUser);
         }
     }
 
     // unregistered from a course
     public void unregisterFromCourse(User loggedInUser) {
         if (loggedInUser instanceof Student) {
-            ((Student) loggedInUser).unregisteredFromCourse(selectedCourse, loggedInUser);
+//            ((Student) loggedInUser).unregisteredFromCourse(selectedCourse, loggedInUser);
         } else if (loggedInUser instanceof Admin) {
             ((Admin) loggedInUser).unregisteredFromCourse(selectedCourse, loggedInUser);
         }

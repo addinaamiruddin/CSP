@@ -66,6 +66,7 @@ public class AdminRegisterController implements Initializable {
     private String mySpecialization;
     private int myDuration;
     List<Student> listOfUsers = new ArrayList();
+    private SceneController SC;
 
     public AdminRegisterController() {
     }
@@ -86,20 +87,20 @@ public class AdminRegisterController implements Initializable {
         theAddress.setPostalCode(postalCode);
         String country = this.input_country.getText();
         theAddress.setCountry(country);
-        Student newStudent = new Student(username, password, emailAddress, phoneNumber, theAddress, this.myMOD, this.myFaculty, this.myLOS, this.myCourse, this.mySpecialization, this.myDuration);
+        Student newStudent = new Student(username, password, emailAddress, phoneNumber, theAddress);
         this.listOfUsers.add(newStudent);
 
         if (username.contains("Faculty")) {
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("admin_dashboard.fxml"));
             this.root = (Parent)loader.load();
-            AdminDashboardController adminDashboardController = loader.getController();
-            adminDashboardController.displayName(username);
+//            AdminDashboardController adminDashboardController = loader.getController();
+//            adminDashboardController.displayName(username);
         } else {
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_dashboard.fxml"));
             this.root = (Parent)loader.load();
-            StudDashboardController studDashboardController = loader.getController();
-            studDashboardController.displayNameDashboard(username);
-            studDashboardController.displayStudDashboard(newStudent);
+//            StudDashboardController studDashboardController = loader.getController();
+//            studDashboardController.displayNameDashboard(username);
+//            studDashboardController.displayStudDashboard(newStudent);
         }
 
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();

@@ -65,16 +65,23 @@ public class StudRegisterController implements Initializable {
     private String myLOS;
     private String mySpecialization;
     private int myDuration;
-    List<Student> listOfUsers = new ArrayList();
+    static List<Student> listOfStudents = new ArrayList<Student>();
+
+
+    private User loggedInUser;
 
     public StudRegisterController() {
     }
 
     public void OnRegisterClick(ActionEvent event) throws IOException {
+
+        //personal
         String username = this.input_username.getText();
+        String password = this.input_password.getText();
         String emailAddress = this.input_email_address.getText();
         int phoneNumber = Integer.parseInt(this.input_phone_number.getText());
-        String password = this.input_password.getText();
+
+        //address
         AddressInfo theAddress = new AddressInfo();
         String street = this.input_street.getText();
         theAddress.setStreet(street);
@@ -86,75 +93,40 @@ public class StudRegisterController implements Initializable {
         theAddress.setPostalCode(postalCode);
         String country = this.input_country.getText();
         theAddress.setCountry(country);
-        Student newStudent = new Student(username, password, emailAddress, phoneNumber, theAddress, this.myMOD, this.myFaculty, this.myLOS, this.myCourse, this.mySpecialization, this.myDuration);
-        this.listOfUsers.add(newStudent);
 
-        if (username.contains("Faculty")) {
-            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("admin_dashboard.fxml"));
-            this.root = (Parent)loader.load();
-            AdminDashboardController adminDashboardController = loader.getController();
-            adminDashboardController(newStudent); // come back to this
-//            StudDashboardController SD = new StudDashboardController(loggedInUser);
+        theAddress = new AddressInfo(street, city, state, postalCode, country);
+        MediumStudy medium = MediumStudy.valueOf("UNDERGRADUATE");
 
-        } else {
-            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_dashboard.fxml"));
-            this.root = (Parent)loader.load();
-            StudDashboardController studDashboardController = loader.getController();
-            studDashboardController.studentDashboard(newStudent);
-        }
+        Student registeredStudent = Student.getInstance(username, password,
+                emailAddress, phoneNumber, theAddress, medium,
+                "Computer Science");
 
-        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        this.scene = new Scene(this.root);
-        this.stage.setScene(this.scene);
-        this.stage.show();
+        listOfStudents.add(registeredStudent);
+
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_dashboard.fxml"));
+        this.root = loader.load();
+        StudentDashboardDisplayStrategy SDD = loader.getController();
+        SDD.studentDashboard(registeredStudent);
     }
 
-    public void initialize(URL arg0, ResourceBundle arg1) {
-        this.input_LOS.getItems().addAll(this.LOS);
-        this.input_LOS.setOnAction(this::getLOS);
-        this.input_course.getItems().addAll(this.course);
-        this.input_course.setOnAction(this::getCourse);
-        this.input_faculty.getItems().addAll(this.faculty);
-        this.input_faculty.setOnAction(this::getFaculty);
-        this.input_MOD.getItems().addAll(this.MOD);
-        this.input_MOD.setOnAction(this::getMOD);
-        this.input_specialization.getItems().addAll(this.specialization);
-        this.input_specialization.setOnAction(this::getSpecialization);
-    }
-
-    private void getMOD(ActionEvent event) {
-        String myMOD = (String)this.input_MOD.getValue();
-        this.myMOD = myMOD;
-    }
-
-    private void getFaculty(ActionEvent event) {
-        String myFaculty = (String)this.input_faculty.getValue();
-        this.myFaculty = myFaculty;
-    }
-
-    private void getCourse(ActionEvent event) {
-        String myCourse = (String)this.input_course.getValue();
-        if (myCourse.equals("Computer Science")) {
-            this.myDuration = 3;
-        } else {
-            this.myDuration = 4;
-        }
-
-        this.myCourse = myCourse;
-    }
-
-    public void getLOS(ActionEvent event) {
-        String myLOS = (String)this.input_LOS.getValue();
-        this.myLOS = myLOS;
-    }
-
-    public void getSpecialization(ActionEvent event) {
-        String mySpecialization = (String)this.input_specialization.getValue();
-        this.mySpecialization = mySpecialization;
+    private void adminDashboardController(Student newStudent) {
     }
 
     public void back(ActionEvent event) throws IOException {
         Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("main_portal.fxml"));
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
+
+    public void switchToLogin(ActionEvent event) throws IOException {
+        Parent root = (Parent) FXMLLoader.load(this.getClass().getResource("stud_login.fxml"));
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
