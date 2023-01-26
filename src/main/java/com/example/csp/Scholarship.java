@@ -5,6 +5,11 @@
 
 package com.example.csp;
 
+import javafx.fxml.Initializable;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
 public class Scholarship {
     private String index;
     private String status;
@@ -39,5 +44,6 @@ public class Scholarship {
     public String getLevel() {
         return this.level;
     }
+
 }
 

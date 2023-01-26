@@ -1,6 +1,11 @@
 package com.example.csp;
 
-import java.util.InputMismatchException;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.util.Scanner;
 
 // Admin is the subclass of user (INHERITANCE).
@@ -9,26 +14,20 @@ public class Admin extends User {
     private String adminId;
     private static Scanner input = new Scanner(System.in);
     private static Admin instance;
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
     // set it to private to ensure that only one instance of the Admin class is
     // created.
-    private Admin(String username, String password, String emailAddress, int phoneNumber,
-                  AddressInfo addressInfo) {
+    private Admin(String username, String password, String emailAddress, int phoneNumber, AddressInfo addressInfo) {
         super(username, password, emailAddress, phoneNumber, addressInfo);
-    }
-
-    // this one is for dummy
-    public Admin(String adminId, String string, String string2, String string3, int i,
-                 AddressInfo address) {
-        super(string, string2, string3, i, address);
-        this.adminId = adminId;
     }
 
     // SINGLETON PATTERN is used to ensure that there is only one admin object
     // being manipulated throughout the application, and to prevent multiple
     // instances of the admin object from being created.
-    public static Admin getInstance(String username, String password, String emailAddress, int phoneNumber,
-                                    AddressInfo addressInfo) {
+    public static Admin getInstance(String username, String password, String emailAddress, int phoneNumber, AddressInfo addressInfo) {
         if (instance == null) {
             instance = new Admin(username, password, emailAddress, phoneNumber, addressInfo);
         }
@@ -41,71 +40,29 @@ public class Admin extends User {
 
     @Override
     void displayUserDashboard(User loggedInUser) {
+
         AdminDashboardDisplayStrategy adminDashboard = new AdminDashboardDisplayStrategy();
-        System.out.print("\033[H\033[2J");
-        System.out.println("===== ADMIN DASHBOARD =====");
-        System.out.println("Welcome " + loggedInUser.getUsername() + "!");
 
-        System.out.println("\n1. MANAGE PERSONAL INFORMATION");
-        System.out.println("2. VIEW STUDENT LIST");
-        System.out.println("3. MANAGE COURSES");
-        System.out.println("4. LOGOUT");
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("admin_dashboard.fxml"));
 
-        System.out.print("\nChoose 1 : ");
-
-        int choice = 0;
         try {
-            choice = input.nextInt();
-        } catch (InputMismatchException e) {
-            System.out.println("Invalid input, please enter a number.");
-            return;
+            this.root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
-        switch (choice) {
-            case 1:
-                adminDashboard.adminInformation(loggedInUser);
-                break;
-            case 2:
-                // view student list;
-                break;
-            case 3:
-                adminDashboard.manageCourse(loggedInUser);
-                break;
-            case 4:
-                adminDashboard.userLogout(loggedInUser);
-                break;
-            default:
-                System.out.println("Invalid option, please try again.");
-                adminDashboard.adminDashboard(loggedInUser);
-                return;
-        }
+        AdminDashboardController ADC = loader.getController();
+        ADC.dashboardController(loggedInUser);
+
+
     }
 
     @Override
-    void displayUserInformation(User loggedInUser) {
-        System.out.print("\033[H\033[2J");
+    public String displayUserInformation(User loggedInUser) {
         AdminDashboardDisplayStrategy adminStrategy = new AdminDashboardDisplayStrategy();
-        try (Scanner input = new Scanner(System.in)) {
-            System.out.println("===== ADMIN INFORMATION =====");
-            System.out.println("Admin Name  : " + loggedInUser.getUsername());
-            System.out.println("Password      : " + loggedInUser.getPassword());
-            System.out.println("Admin ID    : " + ((Admin) loggedInUser).getAdminId());
-            System.out.println("Email Address : " + loggedInUser.getEmailAddress());
-            System.out.println("Phone Number  : " + loggedInUser.getPhoneNumber());
-
-            System.out.println("\n===== ADMIN ADDRESS INFORMATION =====");
-            System.out.println("Street       : " + loggedInUser.getAddressInfo().getStreet());
-            System.out.println("City         : " + loggedInUser.getAddressInfo().getCity());
-            System.out.println("State        : " + loggedInUser.getAddressInfo().getState());
-            System.out.println("Postal Code  : " + loggedInUser.getAddressInfo().getPostalCode());
-            System.out.println("Country      : " + loggedInUser.getAddressInfo().getCountry());
-
-            System.out.print("\nPress 0 to return : ");
-            int selection = input.nextInt();
-            if (selection == 0)
-                adminStrategy.adminDashboard(loggedInUser);
-        }
+        return getUsername();
     }
+
 }
 
 

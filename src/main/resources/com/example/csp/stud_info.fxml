@@ -114,7 +114,7 @@
                   </Label>
                </children>
             </GridPane>
-            <Button layoutX="263.0" layoutY="364.0" mnemonicParsing="false" onAction="#switchToEditStudInfo" prefHeight="38.0" prefWidth="166.0" style="-fx-background-color: navy;" text="EDIT INFORMATION" textFill="WHITE">
+            <Button fx:id="edit_button" layoutX="263.0" layoutY="364.0" mnemonicParsing="false" onAction="#editBtn" prefHeight="38.0" prefWidth="166.0" style="-fx-background-color: navy;" text="EDIT INFORMATION" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

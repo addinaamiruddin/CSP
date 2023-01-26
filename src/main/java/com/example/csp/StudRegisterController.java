@@ -105,8 +105,8 @@ public class StudRegisterController implements Initializable {
 
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_dashboard.fxml"));
         this.root = loader.load();
-        StudentDashboardDisplayStrategy SDD = loader.getController();
-        SDD.studentDashboard(registeredStudent);
+        StudentDashboardDisplayStrategy SDDS = loader.getController();
+        SDDS.studentDashboard(registeredStudent);
     }
 
     private void adminDashboardController(Student newStudent) {

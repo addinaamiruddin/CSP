@@ -1,11 +1,32 @@
 package com.example.csp;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-enum MediumOfStudy {
+enum courseLevel {
     FOUNDATION,
     DIPLOMA,
     UNDERGRADUATE,
     POSTGRADUATE,
     PHD;
+}
+
+enum Faculty {
+    EEE("Electrical and Electronics Engineering"),
+    ECE("Electronics and Communication Engineering"),
+    CSE("Computer Science Engineering"),
+    MECHANICAL("Mechanical Engineering"),
+    CIVIL("Civil Engineering");
+
+    private String fullFacultyName;
+
+    Faculty(String fullFacultyName) {
+        this.fullFacultyName = fullFacultyName;
+    }
+
+    public String getFullFacultyName() {
+        return fullFacultyName;
+    }
 }
 
 // The Course class represents a course offered by the university.
@@ -24,14 +45,13 @@ public class Course extends CourseDelegation {
     private boolean scholarshipFacilities;
     private int feeStructure;
     private int maximumStudent;
-    private MediumOfStudy mediumStudy;
+    private courseLevel mediumStudy;
+    private Faculty faculty;
 
     private static List<Course> courses = new ArrayList<>();
     private CourseDelegation delegation = new CourseDelegation();
 
-    public Course(String courseId, String courseName, String[] subjectTaught, int courseDuration,
-                  String[] employmentOpportunities, String[] scopeForFutherStudies, boolean scholarshipFacilities,
-                  int feeStructure, int maximumStudent, MediumOfStudy mediumStudy) {
+    public Course(String courseId, String courseName, String[] subjectTaught, int courseDuration, String[] employmentOpportunities, String[] scopeForFutherStudies, boolean scholarshipFacilities, int feeStructure, int maximumStudent, courseLevel mediumStudy, Faculty faculty) {
         this.courseId = courseId;
         this.courseName = courseName;
         this.subjectTaught = subjectTaught;
@@ -42,21 +62,13 @@ public class Course extends CourseDelegation {
         this.feeStructure = feeStructure;
         this.maximumStudent = maximumStudent;
         this.mediumStudy = mediumStudy;
+        this.faculty = faculty;
     }
 
     public Course() {
     }
 
-    @Override
-    public String toString() {
-        return "courseId : " + courseId + "\ncourseName : " + courseName + "\nsubjectTaught : "
-                + Arrays.toString(subjectTaught) + "\ncourseDuration : " + courseDuration
-                + "\nemploymentOpportunities : "
-                + Arrays.toString(employmentOpportunities) + "\nscopeForFutherStudies : "
-                + Arrays.toString(scopeForFutherStudies) + "\nscholarshipFacilities : " + scholarshipFacilities
-                + "\nfeeStructure : " + feeStructure + "\nmaximumStudent : " + maximumStudent + "\nmediumStudy : "
-                + mediumStudy;
-    }
+    // toString()
 
     public String getCourseId() {
         return courseId;
@@ -130,12 +142,20 @@ public class Course extends CourseDelegation {
         this.maximumStudent = maximumStudent;
     }
 
-    public MediumOfStudy getMediumStudy() {
+    public courseLevel getMediumStudy() {
         return mediumStudy;
     }
 
-    public void setMediumStudy(MediumOfStudy mediumStudy) {
+    public void setMediumStudy(courseLevel mediumStudy) {
         this.mediumStudy = mediumStudy;
+    }
+
+    public Faculty getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
     }
 
     public static List<Course> getCourses() {
@@ -151,18 +171,6 @@ public class Course extends CourseDelegation {
     }
 
     public void withdrawCourse() {
-    }
-
-    public void createCourses() {
-        Course businessManagement = new Course("ODN3329", "Bachelor of Business Management (Hons.)",
-                new String[] { "Data Structures", "Algorithms", "Programming Languages" },
-                120,
-                new String[] { "Masters in Computer Science",
-                        "MBA in IT" },
-                new String[] { "hello" },
-                true, 14, 120, MediumOfStudy.FOUNDATION);
-
-        courses.add(businessManagement);
     }
 
     public static List<Course> getAllCourses() {

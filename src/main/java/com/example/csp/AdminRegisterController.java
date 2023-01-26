@@ -65,7 +65,7 @@ public class AdminRegisterController implements Initializable {
     private String myLOS;
     private String mySpecialization;
     private int myDuration;
-    List<Student> listOfUsers = new ArrayList();
+    List<Admin> listOfAdmins = new ArrayList();
     private SceneController SC;
 
     public AdminRegisterController() {
@@ -87,26 +87,15 @@ public class AdminRegisterController implements Initializable {
         theAddress.setPostalCode(postalCode);
         String country = this.input_country.getText();
         theAddress.setCountry(country);
-        Student newStudent = new Student(username, password, emailAddress, phoneNumber, theAddress);
-        this.listOfUsers.add(newStudent);
 
-        if (username.contains("Faculty")) {
-            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("admin_dashboard.fxml"));
-            this.root = (Parent)loader.load();
-//            AdminDashboardController adminDashboardController = loader.getController();
-//            adminDashboardController.displayName(username);
-        } else {
-            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_dashboard.fxml"));
-            this.root = (Parent)loader.load();
-//            StudDashboardController studDashboardController = loader.getController();
-//            studDashboardController.displayNameDashboard(username);
-//            studDashboardController.displayStudDashboard(newStudent);
-        }
+        Admin newAdmin = Admin.getInstance(username, password, emailAddress, phoneNumber, theAddress);
 
-        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        this.scene = new Scene(this.root);
-        this.stage.setScene(this.scene);
-        this.stage.show();
+        listOfAdmins.add(newAdmin);
+
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("admin_dashboard.fxml"));
+        this.root = loader.load();
+        AdminDashboardDisplayStrategy ADDS = loader.getController();
+        ADDS.adminDashboard(newAdmin);
     }
 
     public void initialize(URL arg0, ResourceBundle arg1) {

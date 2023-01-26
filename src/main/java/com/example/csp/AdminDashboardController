@@ -15,17 +15,19 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class AdminDashboardController {
-    Label label_faculty_name;
+    private Label label_faculty_name;
     private Stage stage;
     private Scene scene;
     private Parent root;
     private User loggedInUser;
 
     public AdminDashboardController(User loggedInUser) {
+        this.loggedInUser=loggedInUser;
     }
 
-    public void adminDashboard(User loggedInUser) {
+    public void dashboardController(User loggedInUser) {
         this.loggedInUser=loggedInUser;
+        label_faculty_name.setText(loggedInUser.displayUserInformation(loggedInUser));
     }
 
     public void logOut(ActionEvent event) throws IOException {

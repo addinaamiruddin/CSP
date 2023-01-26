@@ -106,7 +106,7 @@
                   <TextField fx:id="TF_state" promptText="State" GridPane.columnIndex="2" GridPane.rowIndex="7" />
                </children>
             </GridPane>
-            <Button layoutX="263.0" layoutY="364.0" mnemonicParsing="false" onAction="#saveBtn" prefHeight="38.0" prefWidth="166.0" style="-fx-background-color: navy;" text="SAVE INFORMATION" textFill="WHITE">
+            <Button fx:id="save_button" layoutX="263.0" layoutY="364.0" mnemonicParsing="false" onAction="#saveBtn" prefHeight="38.0" prefWidth="166.0" style="-fx-background-color: navy;" text="SAVE INFORMATION" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -154,7 +154,7 @@
                                 <Insets top="10.0" />
                             </padding>
                         </Hyperlink>
-                        <Hyperlink layoutX="10.0" layoutY="184.0" onAction="#switchToFeeStructure" prefHeight="38.0" prefWidth="189.0" text="Finance" textFill="WHITE" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                        <Hyperlink layoutX="10.0" layoutY="184.0" onAction="#switchToScholarshipFacilities" prefHeight="38.0" prefWidth="189.0" text="Finance" textFill="WHITE" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="7">
                             <font>
                                 <Font size="14.0" />
                             </font>

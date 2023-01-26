@@ -22,12 +22,12 @@ public class AddressInfo {
     public AddressInfo() {
     }
 
-    @Override
-    public String toString() {
-        return "AddressInfo street = " + street + ", city = " + city + ", state = " + state + ", postalCode = "
-                + postalCode
-                + ", country = " + country;
-    }
+//    @Override
+//    public String toString() {
+//        return "AddressInfo street = " + street + ", city = " + city + ", state = " + state + ", postalCode = "
+//                + postalCode
+//                + ", country = " + country;
+//    }
 
     public String getStreet() {
         return street;

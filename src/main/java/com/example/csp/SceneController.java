@@ -92,4 +92,52 @@ public class SceneController {
         this.stage.setScene(this.scene);
         this.stage.show();
     }
+
+    public void switchToAdminPortal(ActionEvent event) throws IOException {
+        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("admin_login_register.fxml"));
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
+    }
+
+    public void switchToStudentPortal(ActionEvent event) throws IOException {
+        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("stud_login_register.fxml"));
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
+    }
+
+    public void switchToAdminLogin(ActionEvent event) throws IOException {
+        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("admin_login.fxml"));
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
+    }
+
+    public void switchToStudentLogin(ActionEvent event) throws IOException {
+        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("stud_login.fxml"));
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
+    }
+
+    public void switchToAdminRegister(ActionEvent event) throws IOException {
+        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("admin_register.fxml"));
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
+    }
+
+    public void switchToStudentRegister(ActionEvent event) throws IOException {
+        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("stud_register.fxml"));
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
+    }
 }

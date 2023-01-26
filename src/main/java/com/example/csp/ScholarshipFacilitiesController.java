@@ -38,4 +38,7 @@ public class ScholarshipFacilitiesController implements Initializable {
         this.index.setCellValueFactory(new PropertyValueFactory("level"));
         this.table.setItems(this.list);
     }
+
+    public void scholarshipDisplay(User loggedInUser) {
+    }
 }

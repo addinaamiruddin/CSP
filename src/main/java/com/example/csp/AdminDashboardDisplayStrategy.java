@@ -1,5 +1,16 @@
 package com.example.csp;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 // The AdminDashboardDisplayStrategy class is an implementation of the STRATEGY PATTERN and POLYMORPHISM.
 // It provides a way for the application to handle the display of the admin dashboard in a flexible and interchangeable manner.
 // By implementing the strategy pattern, the application can easily switch between different display strategies (student/admin dashboard) without affecting the rest of the code.
@@ -11,107 +22,47 @@ public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
     Admin loggedInUser = null;
     Course selectedCourse = new Course();
     private Course course = new Course();
-    private static Scanner input = new Scanner(System.in);
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
     @Override
     public void displayUserPortal() {
-        // logic to display admin dashboard
-        System.out.print("\033[H\033[2J");
-        try (Scanner input = new Scanner(System.in)) {
-            System.out.println("===== WELCOME TO ADMIN PORTAL =====");
-            System.out.println("\n(1) LOGIN");
-            System.out.println("(2) REGISTER");
+        // to display login or register for admin
 
-            System.out.print("\nChoose 1 : ");
-            int selection = input.nextInt();
-            if (selection == 1) {
-                displayUserLogin();
-            } else if (selection == 2) {
-                displayUserRegister();
-            }
+        SceneController SC = new SceneController();
+        try {
+            SC.switchToAdminPortal(new ActionEvent());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
     @Override
     public void displayUserLogin() {
-        System.out.print("\033[H\033[2J");
-
-        AddressInfo address = new AddressInfo("123 Main St", "Anytown", "USA", "12345", "Malaysia");
-        ListOfAdmins.add(new Admin("A12345", "admin", "123", "admin@example.com", 123456789, address));
-
-        try (Scanner input = new Scanner(System.in)) {
-            System.out.println("===== ADMIN LOGIN =====");
-            System.out.print("\nEnter username: ");
-            String inpUser = input.nextLine();
-            System.out.print("Enter password: ");
-            String inpPass = input.nextLine();
-
-            // check if admin is exist
-            for (Admin user : ListOfAdmins) {
-                if (user.getUsername().equals(inpUser)) {
-                    if (user.getPassword().equals(inpPass)) {
-                        loggedInUser = user;
-                        adminDashboard(loggedInUser);
-                        break;
-                    }
-                } else {
-                    System.out.println("Invalid username/password combination\n");
-                }
-            }
-            if (loggedInUser == null) {
-                System.out.println("Invalid username/password combination\n");
-            }
-
+        SceneController SC = new SceneController();
+        try {
+            SC.switchToAdminLogin(new ActionEvent());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
     @Override
     public void displayUserRegister() {
-        System.out.print("\033[H\033[2J");
-
-        System.out.println("===== ADMIN REGISTRATION =====");
-        System.out.print("\nEnter username      : ");
-        String username = input.nextLine();
-
-        System.out.print("Enter password      : ");
-        String password = input.nextLine();
-
-        System.out.print("Enter email address : ");
-        String emailAddress = input.nextLine();
-
-        System.out.print("Enter phone number  : ");
-        int phoneNumber = Integer.parseInt(input.nextLine());
-
-        System.out.println("\n===== ADDRESS INFORMATION =====");
-        System.out.print("\nEnter street : ");
-        String street = input.nextLine();
-
-        System.out.print("Enter city : ");
-        String city = input.nextLine();
-
-        System.out.print("Enter state : ");
-        String state = input.nextLine();
-
-        System.out.print("Enter postalCode : ");
-        String postalCode = input.nextLine();
-
-        System.out.print("Enter country : ");
-        String country = input.nextLine();
-
-        AddressInfo theAddress = new AddressInfo(street, city, state, postalCode, country);
-        Admin registeredAdmin = Admin.getInstance(username, password, emailAddress, phoneNumber, theAddress);
-
-        ListOfAdmins.add(registeredAdmin);
-        adminDashboard(registeredAdmin);
+        SceneController SC = new SceneController();
+        try {
+            SC.switchToAdminRegister(new ActionEvent());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void adminDashboard(User loggedInUser) {
         loggedInUser.displayUserDashboard(loggedInUser);
     }
 
-    public void adminInformation(User loggedInUser) {
-        loggedInUser.displayUserInformation(loggedInUser);
-    }
+    //adminInformation
 
     public void addCourse(User loggedInUser) {
         course.handleAddCourse(loggedInUser);
@@ -129,7 +80,11 @@ public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
         course.handleCourseActions(loggedInUser);
     }
 
-    public void userLogout(User loggedInUser) {
-        loggedInUser.displayUserLogout(loggedInUser);
+    public void logout(ActionEvent event) throws IOException {
+        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("main_portal.fxml"));
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
     }
 }

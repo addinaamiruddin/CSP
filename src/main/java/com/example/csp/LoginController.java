@@ -34,11 +34,12 @@ public class LoginController {
         String inpPass = this.input_password.getText();
 
         // check if student is exist
-        for (Student user : listOfStudents) {
+        for (Student user : StudRegisterController.listOfStudents) {
             if (user.getUsername().equals(inpUser)) {
                 if (user.getPassword().equals(inpPass)) {
                     loggedInUser = user;
-                    studentDashboard(loggedInUser);
+                    StudentDashboardDisplayStrategy SDCC = new StudentDashboardDisplayStrategy();
+                    SDCC.studentDashboard(loggedInUser);
                     break;
                 }
             } else {

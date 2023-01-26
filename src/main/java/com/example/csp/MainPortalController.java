@@ -20,22 +20,14 @@ public class MainPortalController {
 
     public void clickStudentBtn(ActionEvent event) {
         strategy = new StudentDashboardDisplayStrategy();
+        strategy.displayUserPortal();
 
-//        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("stud_stud_scholarship_facilities.fxml"));
-//        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-//        this.scene = new Scene(root);
-//        this.stage.setScene(this.scene);
-//        this.stage.show();
     }
 
     public void clickAdminBtn(ActionEvent event) {
         strategy = new AdminDashboardDisplayStrategy();
+        strategy.displayUserPortal();
 
-//        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("stud_stud_scholarship_facilities.fxml"));
-//        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-//        this.scene = new Scene(root);
-//        this.stage.setScene(this.scene);
-//        this.stage.show();
     }
 
 

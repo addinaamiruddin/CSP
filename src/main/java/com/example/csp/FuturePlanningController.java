@@ -122,4 +122,7 @@ public class FuturePlanningController extends Application implements Initializab
         this.stage.setScene(this.scene);
         this.stage.show();
     }
+
+    public void futurePlanningDisplay(User loggedInUser) {
+    }
 }

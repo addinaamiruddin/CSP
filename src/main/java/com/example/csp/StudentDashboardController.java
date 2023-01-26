@@ -21,7 +21,8 @@ public class StudentDashboardController {
 
     public void dashboardController(User loggedInUser) {
         this.loggedInUser = loggedInUser;
-        label_welcome.setText("Hello, "+loggedInUser.getUsername()+"!");
+
+        label_welcome.setText("Hello, "+loggedInUser.displayUserInformation(loggedInUser)+"!");
 
         // at student info square
         label_id.setText(":  "+((Student)loggedInUser).getStudentId());
@@ -29,7 +30,6 @@ public class StudentDashboardController {
         label_phoneNum.setText(":  "+loggedInUser.getPhoneNumber());
         label_address.setText(":  "+loggedInUser.getAddressInfo());
         label_email.setText(":  "+loggedInUser.getEmailAddress());
-
     }
 
     public void clickStudInfo(ActionEvent event) {

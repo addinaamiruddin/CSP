@@ -30,77 +30,43 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
     private Scene scene;
     private Parent root;
 
-
-
-//    @Override
-//    public void displayUserPortal() {
-//        // logic to display student dashboard
-//        System.out.print("\033[H\033[2J");
-//        System.out.println("===== WELCOME TO STUDENT PORTAL =====");
-//        System.out.println("\n(1) LOGIN");
-//        System.out.println("(2) REGISTER");
-//
-//        System.out.print("\nChoose 1 : ");
-//        int selection = input.nextInt();
-//        if (selection == 1) {
-//            displayUserLogin();
-//        } else if (selection == 2) {
-//            displayUserRegister();
-//        }
-//    }
-
     @Override
-    public void displayUserLogin(ActionEvent event) {
+    public void displayUserPortal() {
+        // to display login or register for admin
 
-        Parent root = null;
+        SceneController SC = new SceneController();
         try {
-            root = (Parent) FXMLLoader.load(this.getClass().getResource("stud_login.fxml"));
+            SC.switchToStudentPortal(new ActionEvent());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        this.scene = new Scene(root);
-        this.stage.setScene(this.scene);
-        this.stage.show();
+    }
 
+    public void displayUserLogin() {
+        SceneController SC = new SceneController();
+        try {
+            SC.switchToStudentLogin(new ActionEvent());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     // open stud_register.fxml
-    public void displayUserRegister(ActionEvent event) {
-
-        Parent root = null;
+    public void displayUserRegister() {
+        SceneController SC = new SceneController();
         try {
-            root = (Parent) FXMLLoader.load(this.getClass().getResource("stud_register.fxml"));
+            SC.switchToStudentRegister(new ActionEvent());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        this.scene = new Scene(root);
-        this.stage.setScene(this.scene);
-        this.stage.show();
-
     }
 
     public void studentDashboard(User loggedInUser) {
         loggedInUser.displayUserDashboard(loggedInUser);
     }
 
-//    public void displayAcademicCredentials() {
-        // if (loggedInUser != null) {
-        // System.out.println("Academic Credentials for " + loggedInUser.getUsername() +
-        // ":");
-        // System.out.println("Degree: " + loggedInUser.getDegree());
-        // System.out.println("Major: " + loggedInUser.getMajor());
-        // System.out.println("GPA: " + loggedInUser.getGpa());
-        // } else {
-        // System.out.println("You must be logged in to view your
-        // academiccredentials.");
-        // }
-//    }
-
-    public void userInformation(User loggedInUser) {
-        loggedInUser.displayUserInformation(loggedInUser);
-    }
+    //displayAcademicCredentials
+    //userInformation
 
     public void addCourse(User loggedInUser) {
         course.handleAddCourse(loggedInUser);
@@ -118,13 +84,14 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
         course.handleCourseActions(loggedInUser);
     }
 
-    public void displayRegisteredCourse(User loggedInUser) {
-        if (loggedInUser instanceof Student) {
-            ((Student) loggedInUser).printRegisteredCourses(loggedInUser);
-        } else if (loggedInUser instanceof Admin) {
-            // ((Admin) loggedInUser).printAllCourse();
-        }
-    }
+//    public void displayRegisteredCourse(User loggedInUser) {
+//        if (loggedInUser instanceof Student) {
+//            ((Student) loggedInUser).printRegisteredCourses(loggedInUser);
+//        } else if (loggedInUser instanceof Admin) {
+//            // ((Admin) loggedInUser).printAllCourse();
+//        }
+//    }
+
 
     // scene controller
     public void switchToFeeStructure(ActionEvent event) throws IOException {
