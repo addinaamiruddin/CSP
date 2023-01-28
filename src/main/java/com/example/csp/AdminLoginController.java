@@ -13,18 +13,16 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import static com.example.csp.StudRegisterController.listOfStudents;
 
-public class StudLoginController {
+public class AdminLoginController {
     @FXML
     private TextField input_username;
     @FXML
     private TextField input_password;
     User loggedInUser = null;
-//    static List<Student> listOfStudents = new ArrayList<Student>();
-
+    List<User> listOfAdmins = new ArrayList<>();
     @FXML
     private Label labelWarning;
     private Stage stage;
@@ -36,23 +34,19 @@ public class StudLoginController {
         String inpUser = this.input_username.getText();
         String inpPass = this.input_password.getText();
 
-//        for (Student student : Student.listOfStudents) {
-//            System.out.println("Username: " + student.getUsername() + ", Password: " + student.getPassword());
-//        }
-
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_dashboard.fxml"));
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("admin_dashboard.fxml"));
         try {
             this.root = loader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         // check if student is exist
-        for (Student student : Student.listOfStudents) {
-            if (student.getUsername().equals(inpUser)) {
-                if (student.getPassword().equals(inpPass)) {
-                    loggedInUser = student;
-                    StudentDashboardController SDC = loader.getController();
-                    SDC.dashboardController(loggedInUser);
+        for (User user : listOfAdmins) {
+            if (user.getUsername().equals(inpUser)) {
+                if (user.getPassword().equals(inpPass)) {
+                    loggedInUser = user;
+                    AdminDashboardDisplayStrategy ADDS = loader.getController();
+                    ADDS.adminDashboard(loggedInUser);
                 }
             } else {
                 labelWarning.setText("Invalid username/password combination");
@@ -62,11 +56,6 @@ public class StudLoginController {
         if (loggedInUser == null) {
             labelWarning.setText("Invalid username/password combination");
         }
-
-        Scene scene = new Scene(root);
-        Stage stage1 = new Stage();
-        stage1.setScene(scene);
-        stage1.show();
     }
 
     //scene controller
@@ -78,9 +67,10 @@ public class StudLoginController {
         this.stage.show();
     }
     public void displayUserRegister(ActionEvent event) {
+
         Parent root = null;
         try {
-            root = FXMLLoader.load(this.getClass().getResource("stud_register.fxml"));
+            root = (Parent) FXMLLoader.load(this.getClass().getResource("admin_register.fxml"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -88,6 +78,7 @@ public class StudLoginController {
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
         this.stage.show();
+
     }
 
 }

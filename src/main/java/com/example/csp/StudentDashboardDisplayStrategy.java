@@ -31,34 +31,54 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
     private Parent root;
 
     @Override
-    public void displayUserPortal() {
+    public void displayUserPortal(ActionEvent event) {
         // to display login or register for admin
-
-        SceneController SC = new SceneController();
         try {
-            SC.switchToStudentPortal(new ActionEvent());
+            switchToStudentPortal(event);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void displayUserLogin() {
-        SceneController SC = new SceneController();
+    public void switchToStudentPortal(ActionEvent event) throws IOException {
+        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("stud_login_register.fxml"));
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
+    }
+
+    public void displayUserLogin(ActionEvent event) {
         try {
-            SC.switchToStudentLogin(new ActionEvent());
+            switchToStudentLogin(event);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void switchToStudentLogin(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(this.getClass().getResource("stud_login.fxml"));
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
     }
 
     // open stud_register.fxml
-    public void displayUserRegister() {
-        SceneController SC = new SceneController();
+    public void displayUserRegister(ActionEvent event) {
         try {
-            SC.switchToStudentRegister(new ActionEvent());
+            switchToStudentRegister(event);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void switchToStudentRegister(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(this.getClass().getResource("stud_register.fxml"));
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
     }
 
     public void studentDashboard(User loggedInUser) {

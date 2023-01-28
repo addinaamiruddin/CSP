@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class StudentManageCourseController implements Initializable {
@@ -28,6 +27,7 @@ public class StudentManageCourseController implements Initializable {
     private TableColumn<Course, Float> feeColumn;
     private TableColumn<Course, String> courseColumn;
     private ChoiceBox<String> choiceBox_course;
+    private User loggedInUser;
 
     public StudentManageCourseController() {}
 
@@ -166,7 +166,9 @@ public class StudentManageCourseController implements Initializable {
 
     // add course into tableview
     void confirm(ActionEvent event) {
-        Course course = new Course(choiceBox_course.getValue());
+        String selectedCourse = choiceBox_course.getValue();
+
+        Course course = new Course();
         ObservableList<Course> courses = tableView.getItems();
         courses.add(course);
         tableView.setItems(courses);
@@ -178,5 +180,8 @@ public class StudentManageCourseController implements Initializable {
     }
 
     public void courseDisplay(User loggedInUser) {
+        this.loggedInUser=loggedInUser;
     }
+
+
 }

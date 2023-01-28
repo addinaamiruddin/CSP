@@ -22,7 +22,7 @@ public class SceneController {
     }
 
     public void switchToCourseInfo(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("stud_add_course.fxml"));
+        Parent root = FXMLLoader.load(this.getClass().getResource("stud_add_course.fxml"));
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
@@ -30,7 +30,7 @@ public class SceneController {
     }
 
     public void switchToEditCourseInfo(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("stud_edit_course_info.fxml"));
+        Parent root = FXMLLoader.load(this.getClass().getResource("stud_edit_course_info.fxml"));
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
@@ -38,7 +38,7 @@ public class SceneController {
     }
 
     public void switchToEditStudInfo(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("edit_stud_info.fxml"));
+        Parent root = FXMLLoader.load(this.getClass().getResource("edit_stud_info.fxml"));
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
@@ -46,7 +46,7 @@ public class SceneController {
     }
 
     public void switchToFeeStructure(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("stud_fee_structure.fxml"));
+        Parent root = FXMLLoader.load(this.getClass().getResource("stud_fee_structure.fxml"));
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
@@ -54,7 +54,7 @@ public class SceneController {
     }
 
     public void switchToFuturePlanning(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("stud_future_planning.fxml"));
+        Parent root = FXMLLoader.load(this.getClass().getResource("stud_future_planning.fxml"));
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
@@ -62,7 +62,7 @@ public class SceneController {
     }
 
     public void switchToScholarshipFacilities(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("stud_stud_scholarship_facilities.fxml"));
+        Parent root = FXMLLoader.load(this.getClass().getResource("stud_stud_scholarship_facilities.fxml"));
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
@@ -70,7 +70,7 @@ public class SceneController {
     }
 
     public void switchToStudentDashboard(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("stud_dashboard.fxml"));
+        Parent root = FXMLLoader.load(this.getClass().getResource("stud_dashboard.fxml"));
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
@@ -78,7 +78,7 @@ public class SceneController {
     }
 
     public void switchToStudentInformation(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("student_information.fxml"));
+        Parent root = FXMLLoader.load(this.getClass().getResource("student_information.fxml"));
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
@@ -86,7 +86,7 @@ public class SceneController {
     }
 
     public void logout(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("main_portal.fxml"));
+        Parent root = FXMLLoader.load(this.getClass().getResource("main_portal.fxml"));
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
@@ -94,7 +94,7 @@ public class SceneController {
     }
 
     public void switchToAdminPortal(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("admin_login_register.fxml"));
+        Parent root = FXMLLoader.load(this.getClass().getResource("admin_login_register.fxml"));
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
@@ -102,15 +102,21 @@ public class SceneController {
     }
 
     public void switchToStudentPortal(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("stud_login_register.fxml"));
+        Parent root = FXMLLoader.load(this.getClass().getResource("stud_login_register.fxml"));
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
         this.stage.show();
+
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("stud_login_register.fxml"));
+//        Parent root = loader.load();
+//        this.stage = (Stage) event.getSource();
+//        this.stage.setScene(new Scene(root));
+
     }
 
     public void switchToAdminLogin(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("admin_login.fxml"));
+        Parent root = FXMLLoader.load(this.getClass().getResource("admin_login.fxml"));
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
@@ -118,7 +124,7 @@ public class SceneController {
     }
 
     public void switchToStudentLogin(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("stud_login.fxml"));
+        Parent root = FXMLLoader.load(this.getClass().getResource("stud_login.fxml"));
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
@@ -126,18 +132,12 @@ public class SceneController {
     }
 
     public void switchToAdminRegister(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("admin_register.fxml"));
+        Parent root = FXMLLoader.load(this.getClass().getResource("admin_register.fxml"));
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
         this.stage.show();
     }
 
-    public void switchToStudentRegister(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("stud_register.fxml"));
-        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        this.scene = new Scene(root);
-        this.stage.setScene(this.scene);
-        this.stage.show();
-    }
+
 }

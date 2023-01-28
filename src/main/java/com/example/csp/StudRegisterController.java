@@ -101,12 +101,21 @@ public class StudRegisterController implements Initializable {
                 emailAddress, phoneNumber, theAddress, medium,
                 "Computer Science");
 
-        listOfStudents.add(registeredStudent);
+        Student.listOfStudents.add(registeredStudent);
+//        System.out.println(listOfStudents.indexOf());
+
+        for (Student student : Student.listOfStudents) {
+            System.out.println("Username: " + student.getUsername() + ", Password: " + student.getPassword());
+        }
 
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_dashboard.fxml"));
         this.root = loader.load();
-        StudentDashboardDisplayStrategy SDDS = loader.getController();
-        SDDS.studentDashboard(registeredStudent);
+        StudentDashboardController SDC = loader.getController();
+        SDC.dashboardController(registeredStudent);
+        Scene scene = new Scene(root);
+        Stage stage1 = new Stage();
+        stage1.setScene(scene);
+        stage1.show();
     }
 
     private void adminDashboardController(Student newStudent) {

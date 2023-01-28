@@ -19,6 +19,9 @@ public class StudentDashboardController {
     private Label label_welcome, label_id, label_username, label_phoneNum, label_address, label_email;
     private User loggedInUser;
 
+    public StudentDashboardController() {
+    }
+
     public void dashboardController(User loggedInUser) {
         this.loggedInUser = loggedInUser;
 

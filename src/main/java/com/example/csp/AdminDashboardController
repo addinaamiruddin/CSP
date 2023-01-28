@@ -7,6 +7,7 @@ package com.example.csp;
 
 import java.io.IOException;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -15,14 +16,14 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class AdminDashboardController {
+    @FXML
     private Label label_faculty_name;
     private Stage stage;
     private Scene scene;
     private Parent root;
     private User loggedInUser;
 
-    public AdminDashboardController(User loggedInUser) {
-        this.loggedInUser=loggedInUser;
+    public AdminDashboardController() {
     }
 
     public void dashboardController(User loggedInUser) {

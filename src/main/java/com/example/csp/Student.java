@@ -37,6 +37,7 @@ public final class Student extends User {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    public static List<Student> listOfStudents = new ArrayList<Student>();
 
 
     // set it to private to ensure that only one instance of the Student class is

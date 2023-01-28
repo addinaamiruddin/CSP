@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -27,35 +28,53 @@ public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
     private Parent root;
 
     @Override
-    public void displayUserPortal() {
+    public void displayUserPortal(ActionEvent event) {
         // to display login or register for admin
-
-        SceneController SC = new SceneController();
         try {
-            SC.switchToAdminPortal(new ActionEvent());
+            switchToAdminPortal(event);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    @Override
-    public void displayUserLogin() {
-        SceneController SC = new SceneController();
+    public void switchToAdminPortal(ActionEvent event) throws IOException {
+        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("admin_login_register.fxml"));
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
+    }
+
+    public void displayUserLogin(ActionEvent event) {
         try {
-            SC.switchToAdminLogin(new ActionEvent());
+            switchToAdminLogin(event);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    @Override
-    public void displayUserRegister() {
-        SceneController SC = new SceneController();
+    public void switchToAdminLogin(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(this.getClass().getResource("admin_login.fxml"));
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
+    }
+
+    public void displayUserRegister(ActionEvent event) {
         try {
-            SC.switchToAdminRegister(new ActionEvent());
+            switchToAdminRegister(event);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void switchToAdminRegister(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(this.getClass().getResource("admin_register.fxml"));
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
     }
 
     public void adminDashboard(User loggedInUser) {

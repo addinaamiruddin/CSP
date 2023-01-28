@@ -10,9 +10,8 @@ import java.util.Scanner;
 
 // Admin is the subclass of user (INHERITANCE).
 // It contains specific functionality and privileges related to managing the system.
-public class Admin extends User {
+public final class Admin extends User {
     private String adminId;
-    private static Scanner input = new Scanner(System.in);
     private static Admin instance;
     private Stage stage;
     private Scene scene;
@@ -44,17 +43,13 @@ public class Admin extends User {
         AdminDashboardDisplayStrategy adminDashboard = new AdminDashboardDisplayStrategy();
 
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("admin_dashboard.fxml"));
-
         try {
             this.root = loader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-        AdminDashboardController ADC = loader.getController();
-        ADC.dashboardController(loggedInUser);
-
-
+//        AdminDashboardController ADC = loader.getController();
+//        ADC.dashboardController(loggedInUser);
     }
 
     @Override

@@ -9,7 +9,7 @@
    <children>
       <AnchorPane prefHeight="62.0" prefWidth="960.0" style="-fx-border-color: black;">
          <children>
-            <Button fx:id="student_btn" layoutX="779.0" layoutY="18.0" mnemonicParsing="false" onAction="#clickStudentBtn" style="-fx-background-color: navy;" text="STUDENT" textFill="WHITE">
+            <Button layoutX="779.0" layoutY="18.0" mnemonicParsing="false" onAction="#clickStudentBtn" style="-fx-background-color: navy;" text="STUDENT" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
