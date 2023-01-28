@@ -31,7 +31,7 @@ public class StudentDashboardController {
         label_id.setText(":  "+((Student)loggedInUser).getStudentId());
         label_username.setText(":  "+loggedInUser.getUsername());
         label_phoneNum.setText(":  "+loggedInUser.getPhoneNumber());
-        label_address.setText(":  "+loggedInUser.getAddressInfo());
+        label_address.setText(":  "+loggedInUser.getSampleAddress());
         label_email.setText(":  "+loggedInUser.getEmailAddress());
     }
 
@@ -39,58 +39,75 @@ public class StudentDashboardController {
 
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_info.fxml"));
         try {
-            this.root = loader.load();
+            root = (Parent) loader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         StudInfoController SIC = loader.getController();
         SIC.studInfoController(loggedInUser);
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
+
     }
 
     public void clickAddCourseBtn(ActionEvent event) {
 
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_add_course.fxml"));
         try {
-            this.root = loader.load();
+            root = (Parent) loader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         StudentDashboardDisplayStrategy SDD = loader.getController();
         SDD.manageCourse(loggedInUser);
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
     }
 
     public void clickRemoveCourseBtn(ActionEvent event) {
 
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_add_course.fxml"));
         try {
-            this.root = loader.load();
+            root = (Parent) loader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         StudentDashboardDisplayStrategy SDD = loader.getController();
         SDD.manageCourse(loggedInUser);
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
     }
 
     public void clickViewCourseBtn(ActionEvent event) {
 
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_add_course.fxml"));
         try {
-            this.root = loader.load();
+            root = (Parent) loader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         StudentDashboardDisplayStrategy SDD = loader.getController();
         SDD.manageCourse(loggedInUser);
-    }
-
-    // scene controller
-    public void switchToFeeStructure(ActionEvent event) throws IOException {
-        Parent root = (Parent) FXMLLoader.load(this.getClass().getResource("stud_fee_structure.fxml"));
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
         this.stage.show();
     }
+
+    // scene controller
+//    public void switchToFeeStructure(ActionEvent event) throws IOException {
+//        Parent root = (Parent) FXMLLoader.load(this.getClass().getResource("stud_fee_structure.fxml"));
+//        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+//        this.scene = new Scene(root);
+//        this.stage.setScene(this.scene);
+//        this.stage.show();
+//    }
     public void switchToCourseInfo(ActionEvent event) throws IOException {
         Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("stud_add_course.fxml"));
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();

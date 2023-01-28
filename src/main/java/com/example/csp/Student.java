@@ -39,24 +39,31 @@ public final class Student extends User {
     private Parent root;
     public static List<Student> listOfStudents = new ArrayList<Student>();
 
-
     // set it to private to ensure that only one instance of the Student class is
     // created.
-    private Student(String username, String password, String emailAddress, int phoneNumber, AddressInfo addressInfo, MediumStudy mediumStudy, String faculty) {
+//    private Student(String username, String password, String emailAddress, int phoneNumber, AddressInfo addressInfo, MediumStudy mediumStudy, String faculty) {
+    private Student(String username, String password, String emailAddress, int phoneNumber, AddressInfo addressInfo) {
         super(username, password, emailAddress, phoneNumber, addressInfo);
         Random rand = new Random();
         this.studentId = rand.nextInt((1000000000 - 100000000) + 1) + 100000000;
-        this.mediumStudy = mediumStudy;
-        this.faculty = faculty;
-        this.courses = new ArrayList<>();
+//        this.mediumStudy = mediumStudy;
+//        this.faculty = faculty;
+//        this.courses = new ArrayList<>();
     }
 
     // SINGLETON PATTERN is used to ensure that there is only one student object
     // being manipulated throughout the application, and to prevent multiple
     // instances of the student object from being created.
-    public static Student getInstance(String username, String password, String emailAddress, int phoneNumber, AddressInfo theAddress, MediumStudy mediumStudy, String major) {
+//    public static Student getInstance(String username, String password, String emailAddress, int phoneNumber, AddressInfo theAddress, MediumStudy mediumStudy, String major) {
+//        if (instance == null) {
+//            instance = new Student(username, password, emailAddress, phoneNumber, theAddress, mediumStudy, major);
+//        }
+//        return instance;
+//    }
+    public static Student getInstance(String username, String password, String emailAddress, int phoneNumber, AddressInfo theAddress) {
+
         if (instance == null) {
-            instance = new Student(username, password, emailAddress, phoneNumber, theAddress, mediumStudy, major);
+            instance = new Student(username, password, emailAddress, phoneNumber, theAddress);
         }
         return instance;
     }

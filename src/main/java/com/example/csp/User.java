@@ -25,6 +25,10 @@ public abstract class User {
     public User() {
     }
 
+    public String getSampleAddress() {
+        return addressInfo.createSampleAddress();
+    }
+
     public String getUsername() {
         return username;
     }

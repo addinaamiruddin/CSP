@@ -2,6 +2,7 @@ package com.example.csp;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -22,12 +23,25 @@ public class StudentManageCourseController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    @FXML
     private TableView<Course> tableView;
-    private TableColumn<Course, Integer> indexColumn;
-    private TableColumn<Course, Float> feeColumn;
+    @FXML
+    private TableColumn<Course, courseLevel> MOSColumn;
+    @FXML
     private TableColumn<Course, String> courseColumn;
-    private ChoiceBox<String> choiceBox_course;
+    @FXML
+    private TableColumn<Course, Integer> priceColumn;
+    @FXML
+    private ChoiceBox<String> coursesInput;
+    @FXML
+    private ChoiceBox<courseLevel> MOSinput;
+    private final String[] courses = {"Computer Science","Civil Engineering","Mechanical Engineering"};
+//    private final String[] MOS = {"Foundation","Degree","Diploma"};
+//    private MediumStudy MOS = {MediumStudy.values()};
+
+
     private User loggedInUser;
+    private int price;
 
     public StudentManageCourseController() {}
 
@@ -74,7 +88,7 @@ public class StudentManageCourseController implements Initializable {
     }
 
     public void switchToEditStudInfo(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("edit_stud_info.fxml"));
+        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("stud_edit_info.fxml"));
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
@@ -98,7 +112,7 @@ public class StudentManageCourseController implements Initializable {
     }
 
     public void switchToScholarshipFacilities(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("stud_stud_scholarship_facilities.fxml"));
+        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("stud_scholarship_facilities.fxml"));
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
@@ -114,7 +128,7 @@ public class StudentManageCourseController implements Initializable {
     }
 
     public void switchToStudentInformation(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("student_information.fxml"));
+        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("stud_info.fxml"));
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
@@ -157,24 +171,38 @@ public class StudentManageCourseController implements Initializable {
 //            System.out.println("\nYou are already registered for " +
 //                    selectedCourse.getCourseName());
 //        }
+        coursesInput.getItems().addAll(courses);
+        MOSinput.getItems().setAll(courseLevel.values());
 
+        courseColumn.setCellValueFactory(new PropertyValueFactory<>("courseName"));
+        MOSColumn.setCellValueFactory(new PropertyValueFactory<>("mediumStudy"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("feeStructure"));
 
-        indexColumn.setCellValueFactory(new PropertyValueFactory<Course, Integer>("index"));
-        courseColumn.setCellValueFactory(new PropertyValueFactory<Course, String>("course"));
-        feeColumn.setCellValueFactory(new PropertyValueFactory<Course, Float>("fee"));
     }
 
     // add course into tableview
-    void confirm(ActionEvent event) {
-        String selectedCourse = choiceBox_course.getValue();
-
-        Course course = new Course();
+    @FXML
+    void confirm() {
+        if (MOSinput.getValue()==courseLevel.FOUNDATION) {
+            price = 10000;
+        } else if (MOSinput.getValue()==courseLevel.DIPLOMA) {
+            price = 20000;
+        } else if (MOSinput.getValue()==courseLevel.UNDERGRADUATE) {
+            price = 60000;
+        } else if (MOSinput.getValue()==courseLevel.POSTGRADUATE) {
+            price = 25000;
+        } else if (MOSinput.getValue()==courseLevel.PHD) {
+            price = 25000;
+        } 
+        
+        Course course = new Course(coursesInput.getValue(), MOSinput.getValue(), price);
         ObservableList<Course> courses = tableView.getItems();
         courses.add(course);
         tableView.setItems(courses);
     }
 
-    void removeCourse(ActionEvent event) {
+    @FXML
+    void removeCourse() {
         int selectedID = tableView.getSelectionModel().getSelectedIndex();
         tableView.getItems().remove(selectedID);
     }

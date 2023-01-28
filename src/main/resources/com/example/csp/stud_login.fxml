@@ -71,7 +71,7 @@
                         </Button>
                     </children>
                 </AnchorPane>
-            <Label fx:id="labelWarning" layoutX="483.0" layoutY="342.0" />
+            <Label fx:id="labelWarning" layoutX="348.0" layoutY="342.0" prefHeight="17.0" prefWidth="296.0" textAlignment="CENTER" />
             </children>
         </Pane>
         <Button layoutX="36.0" layoutY="36.0" mnemonicParsing="false" onAction="#logout" text="BACK" />

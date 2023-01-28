@@ -148,7 +148,7 @@ public class CourseDelegation {
             AMCC.removeCourse(new ActionEvent());
         } else if (loggedInUser instanceof Student) {
             StudentManageCourseController SMCC = new StudentManageCourseController();
-            SMCC.removeCourse(new ActionEvent());
+//            SMCC.removeCourse(new ActionEvent());
         }
     }
 

@@ -15,7 +15,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class FuturePlanningController extends Application implements Initializable {
+public class FuturePlanningController implements Initializable {
     @FXML
     private Label label_future_career;
     @FXML
@@ -23,18 +23,6 @@ public class FuturePlanningController extends Application implements Initializab
     private final String[] course = new String[]{"Design Engineer", "Project Engineer", "Test Engineer", "Protection Engineer", "Power Engineer", "Sales Engineer", "High Voltage Engineer", "Service Engineer", "Electrical Production Engineer", "Product Development Engineer", "Electrical and Instrument Engineer", "PCB Design Engineer QC Engineer", "Field Service Engineer", "Electrical Engineering Manager", "ME Engineer", "Oil  Gas Process Engineer"};
 
     public FuturePlanningController() {
-    }
-
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("stud_future_planning.fxml"));
-        Scene scene = new Scene((Parent)fxmlLoader.load(), 960.0, 540.0);
-        stage.setTitle("Future Planning");
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 
     public void initialize(URL arg0, ResourceBundle arg1) {

@@ -95,13 +95,17 @@ public class StudRegisterController implements Initializable {
         theAddress.setCountry(country);
 
         theAddress = new AddressInfo(street, city, state, postalCode, country);
+
         MediumStudy medium = MediumStudy.valueOf("UNDERGRADUATE");
 
         Student registeredStudent = Student.getInstance(username, password,
-                emailAddress, phoneNumber, theAddress, medium,
-                "Computer Science");
+                emailAddress, phoneNumber, theAddress);
 
         Student.listOfStudents.add(registeredStudent);
+
+        Student dummyStud = Student.getInstance("johndoe", "123", "johndoe@example.com", 555 - 555 - 5555, theAddress);
+        Student.listOfStudents.add(dummyStud);
+
 //        System.out.println(listOfStudents.indexOf());
 
         for (Student student : Student.listOfStudents) {

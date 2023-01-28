@@ -18,6 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 public class AdminManageCourseController implements Initializable {
+    @FXML
     Label label_faculty_name;
     private Stage stage;
     private Scene scene;
@@ -35,8 +36,10 @@ public class AdminManageCourseController implements Initializable {
     private TableColumn<Course, Integer> maximumStudentColumn;
     private TableColumn<Course, MediumStudy> mediumStudyColumn;
     private TableColumn<Course, Faculty> facultyColumn;
+    @FXML
     private TextField courseIdInput, courseNameInput, subjectTaughtInput, courseDurationInput, employmentOpportunitiesInput, scopeInput, feeStructureInput, maxStudInput, facInput;
 
+    @FXML
     private ChoiceBox<String> scholarshipFacInput, mediumStudyInput;
 
     private String[] status = {"AVAILABLE","UNAVAILABLE"};
@@ -113,62 +116,42 @@ public class AdminManageCourseController implements Initializable {
     }
 
     public void switchToAddCourse(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("admin_add_course.fxml"));
-        Parent parent = loader.load();
-
-        //This line gets the Stage information
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        window.setScene(parent.getScene());
-        window.show();
+        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("admin_add_course.fxml"));
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
     }
 
     public void switchToDeleteCourse(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("admin_delete_course.fxml"));
-        Parent parent = loader.load();
-
-        //This line gets the Stage information
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        window.setScene(parent.getScene());
-        window.show();
+        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("admin_delete_course.fxml"));
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
     }
 
     public void switchToUpdateCourse(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("admin_update_course.fxml"));
-        Parent parent = loader.load();
-
-        //This line gets the Stage information
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        window.setScene(parent.getScene());
-        window.show();
+        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("admin_update_course.fxml"));
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
     }
 
     public void switchToViewCourse(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("admin_view_course.fxml"));
-        Parent parent = loader.load();
-
-        //This line gets the Stage information
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        window.setScene(parent.getScene());
-        window.show();
+        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("admin_view_course.fxml"));
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
     }
 
     public void switchToDashboard(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("admin_dashboard.fxml"));
-        Parent parent = loader.load();
-
-        //This line gets the Stage information
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        window.setScene(parent.getScene());
-        window.show();
+        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("admin_dashboard.fxml"));
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
     }
 }

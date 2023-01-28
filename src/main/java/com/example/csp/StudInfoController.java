@@ -33,7 +33,7 @@ public class StudInfoController {
         label_username.setText(loggedInUser.getUsername());
         label_phoneNumber.setText(String.valueOf(loggedInUser.getPhoneNumber()));
         label_emailAddress.setText(loggedInUser.getEmailAddress());
-        label_emailAddress.setText(String.valueOf(loggedInUser.getAddressInfo()));
+        label_emailAddress.setText(String.valueOf(loggedInUser.getSampleAddress()));
     }
 
     public void studInfoEditController(User loggedInUser) {
@@ -51,128 +51,125 @@ public class StudInfoController {
     }
 
     public void saveBtn(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("stud_info.fxml"));
-        Parent parent = loader.load();
 
-        //access the controller and call a method
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_info.fxml"));
+        try {
+            root = (Parent) loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         StudInfoController controller = loader.getController();
         controller.studInfoController(loggedInUser);
 
-        //This line gets the Stage information
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        window.setScene(parent.getScene());
-        window.show();
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
     }
 
     public void editBtn(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("stud_edit_info.fxml"));
-        Parent parent = loader.load();
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_edit_info.fxml"));
+        try {
+            root = (Parent) loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
-        //access the controller and call a method
         StudInfoController controller = loader.getController();
         controller.studInfoEditController(loggedInUser);
 
-        //This line gets the Stage information
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        window.setScene(parent.getScene());
-        window.show();
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
     }
 
     //scene controller
     public void switchToCourseInfo(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("course_info.fxml"));
-        Parent parent = loader.load();
 
-        //access the controller and call a method
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_add_course.fxml"));
+        try {
+            root = (Parent) loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         StudentManageCourseController controller = loader.getController();
         controller.courseDisplay(loggedInUser);
 
-        //This line gets the Stage information
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        window.setScene(parent.getScene());
-        window.show();
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
     }
 
-//    public void switchToEditStudInfo(ActionEvent event) throws IOException {
-//        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("edit_stud_info.fxml"));
-//        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-//        this.scene = new Scene(root);
-//        this.stage.setScene(this.scene);
-//        this.stage.show();
-//    }
-
     public void switchToFuturePlanning(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_future_planning.fxml"));
+        try {
+            root = (Parent) loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("future_planning.fxml"));
-        Parent parent = loader.load();
-
-        //access the controller and call a method
         FuturePlanningController controller = loader.getController();
         controller.futurePlanningDisplay(loggedInUser);
 
-        //This line gets the Stage information
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        window.setScene(parent.getScene());
-        window.show();
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
     }
 
     public void switchToScholarshipFacilities(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("scholarship_facilities.fxml"));
-        Parent parent = loader.load();
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_scholarship_facilities.fxml"));
+        try {
+            root = (Parent) loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
-        //access the controller and call a method
         ScholarshipFacilitiesController controller = loader.getController();
         controller.scholarshipDisplay(loggedInUser);
 
-        //This line gets the Stage information
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        window.setScene(parent.getScene());
-        window.show();
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
     }
 
     public void switchToStudentDashboard(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_dashboard.fxml"));
+        try {
+            root = (Parent) loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("stud_dashboard.fxml"));
-        Parent parent = loader.load();
-
-        //access the controller and call a method
         StudentDashboardController controller = loader.getController();
         controller.dashboardController(loggedInUser);
 
-        //This line gets the Stage information
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        window.setScene(parent.getScene());
-        window.show();
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
     }
 
     public void switchToStudentInformation(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_info.fxml"));
+        try {
+            root = (Parent) loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("stud_info.fxml"));
-        Parent parent = loader.load();
-
-        //access the controller and call a method
         StudInfoController controller = loader.getController();
         controller.studInfoController(loggedInUser);
 
-        //This line gets the Stage information
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        window.setScene(parent.getScene());
-        window.show();
-
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
     }
 
     public void logout(ActionEvent event) throws IOException {

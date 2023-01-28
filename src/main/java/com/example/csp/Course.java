@@ -51,6 +51,7 @@ public class Course extends CourseDelegation {
     private static List<Course> courses = new ArrayList<>();
     private CourseDelegation delegation = new CourseDelegation();
 
+    // for admin
     public Course(String courseId, String courseName, String[] subjectTaught, int courseDuration, String[] employmentOpportunities, String[] scopeForFutherStudies, boolean scholarshipFacilities, int feeStructure, int maximumStudent, courseLevel mediumStudy, Faculty faculty) {
         this.courseId = courseId;
         this.courseName = courseName;
@@ -63,6 +64,13 @@ public class Course extends CourseDelegation {
         this.maximumStudent = maximumStudent;
         this.mediumStudy = mediumStudy;
         this.faculty = faculty;
+    }
+
+    // for student
+    public Course(String courseName, courseLevel mediumStudy, int price) {
+        this.courseName = courseName;
+        this.mediumStudy = mediumStudy;
+        this.feeStructure = price;
     }
 
     public Course() {
