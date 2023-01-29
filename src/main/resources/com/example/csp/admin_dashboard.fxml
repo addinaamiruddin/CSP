@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csp.AdminDashboardController">
+<AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csp.AdminDashboard_Controller">
    <children>
       <ImageView fitHeight="159.0" fitWidth="960.0" pickOnBounds="true">
          <image>
@@ -23,11 +23,11 @@
             </Lighting>
          </effect>
       </ImageView>
-      <Label fx:id="label_faculty_name" layoutX="362.0" layoutY="28.0" text="Faculty of Engineering" textFill="WHITE" underline="true">
+      <Hyperlink fx:id="label_faculty_name" layoutX="362.0" layoutY="28.0" onAction="#switchToDashboard" text="Faculty of Engineering" textFill="WHITE" underline="true">
          <font>
             <Font size="24.0" />
          </font>
-      </Label>
+      </Hyperlink>
       <Label layoutX="290.0" layoutY="71.0" text="Welcome to Course Selection Portal" textFill="WHITE">
          <font>
             <Font size="24.0" />
@@ -45,22 +45,22 @@
       </Label>
       <AnchorPane layoutX="183.0" layoutY="240.0">
          <children>
-            <Button fx:id="btn_add_course" mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #6CA74B;" text="ADD COURSE" textFill="WHITE">
+            <Button fx:id="btn_add_course" mnemonicParsing="false" onAction="#switchToAddCourse" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #6CA74B;" text="ADD COURSE" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btn_update_course" layoutX="144.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="139.0" style="-fx-background-color: #6CA74B;" text="UPDATE COURSE" textFill="WHITE">
+            <Button fx:id="btn_update_course" layoutX="144.0" mnemonicParsing="false" onAction="#switchToUpdateCourse" prefHeight="35.0" prefWidth="139.0" style="-fx-background-color: #6CA74B;" text="UPDATE COURSE" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btn_delete_course" layoutX="309.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="139.0" style="-fx-background-color: #6CA74B;" text="DELETE COURSE" textFill="WHITE">
+            <Button fx:id="btn_delete_course" layoutX="309.0" mnemonicParsing="false" onAction="#switchToDeleteCourse" prefHeight="35.0" prefWidth="139.0" style="-fx-background-color: #6CA74B;" text="DELETE COURSE" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btn_view_course" layoutX="471.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="126.0" style="-fx-background-color: #6CA74B;" text="VIEW COURSE" textFill="WHITE">
+            <Button fx:id="btn_view_course" layoutX="471.0" mnemonicParsing="false" onAction="#switchToViewCourse" prefHeight="35.0" prefWidth="126.0" style="-fx-background-color: #6CA74B;" text="VIEW COURSE" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>

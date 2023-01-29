@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AdminRegisterController implements Initializable {
+public class AdminRegisterController {
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -52,6 +52,7 @@ public class AdminRegisterController implements Initializable {
     private ChoiceBox<String> input_faculty;
     @FXML
     private ChoiceBox<String> input_MOD;
+    @FXML
     private ChoiceBox<String> input_specialization;
 
     private String[] specialization = new String[] {"Software Engineering", "Data Science"};
@@ -59,23 +60,19 @@ public class AdminRegisterController implements Initializable {
     private String[] course = new String[]{"Computer Science", "Civil Engineering", "Electrical Computer Engineering", "Electrical Engineering", "Mechanical Engineering"};
     private String[] faculty = new String[]{"Faculty of Engineering", "Faculty of Computer Science"};
     private String[] MOD = new String[]{"Online", "Virtual", "Hybrid"};
-    private String myMOD;
-    private String myFaculty;
-    private String myCourse;
-    private String myLOS;
-    private String mySpecialization;
-    private int myDuration;
-    List<Admin> listOfAdmins = new ArrayList();
-    private SceneController SC;
 
     public AdminRegisterController() {
     }
 
     public void OnRegisterClick(ActionEvent event) throws IOException {
+
+        //personal
         String username = this.input_username.getText();
         String emailAddress = this.input_email_address.getText();
         int phoneNumber = Integer.parseInt(this.input_phone_number.getText());
         String password = this.input_password.getText();
+
+        //address
         AddressInfo theAddress = new AddressInfo();
         String street = this.input_street.getText();
         theAddress.setStreet(street);
@@ -90,56 +87,35 @@ public class AdminRegisterController implements Initializable {
 
         Admin newAdmin = Admin.getInstance(username, password, emailAddress, phoneNumber, theAddress);
 
-        listOfAdmins.add(newAdmin);
+        Admin.listOfAdmins.add(newAdmin);
 
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("admin_dashboard.fxml"));
-        this.root = loader.load();
-        AdminDashboardDisplayStrategy ADDS = loader.getController();
-        ADDS.adminDashboard(newAdmin);
-    }
+        Admin dummyAdmin = Admin.getInstance("johndoe", "123", "johndoe@example.com", 555 - 555 - 5555, theAddress);
+        Admin.listOfAdmins.add(dummyAdmin);
 
-    public void initialize(URL arg0, ResourceBundle arg1) {
-        this.input_LOS.getItems().addAll(this.LOS);
-        this.input_LOS.setOnAction(this::getLOS);
-        this.input_course.getItems().addAll(this.course);
-        this.input_course.setOnAction(this::getCourse);
-        this.input_faculty.getItems().addAll(this.faculty);
-        this.input_faculty.setOnAction(this::getFaculty);
-        this.input_MOD.getItems().addAll(this.MOD);
-        this.input_MOD.setOnAction(this::getMOD);
-        this.input_specialization.getItems().addAll(this.specialization);
-        this.input_specialization.setOnAction(this::getSpecialization);
-    }
-
-    private void getMOD(ActionEvent event) {
-        String myMOD = (String)this.input_MOD.getValue();
-        this.myMOD = myMOD;
-    }
-
-    private void getFaculty(ActionEvent event) {
-        String myFaculty = (String)this.input_faculty.getValue();
-        this.myFaculty = myFaculty;
-    }
-
-    private void getCourse(ActionEvent event) {
-        String myCourse = (String)this.input_course.getValue();
-        if (myCourse.equals("Computer Science")) {
-            this.myDuration = 3;
-        } else {
-            this.myDuration = 4;
+        for (Admin admin : Admin.listOfAdmins) {
+            System.out.println("Username: " + admin.getUsername() + ", Password: " + admin.getPassword());
         }
 
-        this.myCourse = myCourse;
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("admin_dashboard.fxml"));
+        try {
+            root = (Parent) loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        AdminDashboardDisplayStrategy ADDS = loader.getController();
+        ADDS.adminDashboard(newAdmin);
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
     }
 
-    public void getLOS(ActionEvent event) {
-        String myLOS = (String)this.input_LOS.getValue();
-        this.myLOS = myLOS;
-    }
-
-    public void getSpecialization(ActionEvent event) {
-        String mySpecialization = (String)this.input_specialization.getValue();
-        this.mySpecialization = mySpecialization;
+    public void switchToAdminLogin(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(this.getClass().getResource("admin_login.fxml"));
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
     }
 
     public void back(ActionEvent event) throws IOException {

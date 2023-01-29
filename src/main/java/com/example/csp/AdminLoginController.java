@@ -11,10 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.example.csp.StudRegisterController.listOfStudents;
 
 public class AdminLoginController {
     @FXML
@@ -22,7 +18,6 @@ public class AdminLoginController {
     @FXML
     private TextField input_password;
     User loggedInUser = null;
-    List<User> listOfAdmins = new ArrayList<>();
     @FXML
     private Label labelWarning;
     private Stage stage;
@@ -34,43 +29,76 @@ public class AdminLoginController {
         String inpUser = this.input_username.getText();
         String inpPass = this.input_password.getText();
 
+        for (Admin admin : Admin.listOfAdmins) {
+            System.out.println("helloUsername: " + admin.getUsername() + ", Password: " + admin.getPassword());
+        }
+
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("admin_dashboard.fxml"));
         try {
-            this.root = loader.load();
+            root = loader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        // check if student is exist
-        for (User user : listOfAdmins) {
-            if (user.getUsername().equals(inpUser)) {
-                if (user.getPassword().equals(inpPass)) {
-                    loggedInUser = user;
-                    AdminDashboardDisplayStrategy ADDS = loader.getController();
-                    ADDS.adminDashboard(loggedInUser);
-                }
-            } else {
-                labelWarning.setText("Invalid username/password combination");
-            }
-        }
 
-        if (loggedInUser == null) {
-            labelWarning.setText("Invalid username/password combination");
-        }
-    }
+//        // check if admin is exist
+//        for (User user : listOfAdmins) {
+//            if (user.getUsername().equals(inpUser)) {
+//                if (user.getPassword().equals(inpPass)) {
+//                    loggedInUser = user;
+//                    AdminDashboardDisplayStrategy ADDS = loader.getController();
+//                    ADDS.adminDashboard(loggedInUser);
+//                }
+//            } else {
+//                labelWarning.setText("Invalid username/password combination");
+//            }
+//        }
+//
+//        if (loggedInUser == null) {
+//            labelWarning.setText("Invalid username/password combination");
+//        }
+        AddressInfo sampleAddress = new AddressInfo("Street", "City", "State", "25300", "Country");
 
-    //scene controller
-    public void logout(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("main_portal.fxml"));
+//        if (authenticate(inpUser, inpPass)) {
+//            Admin loggedInUser = Admin.getInstance("admin", "testing", "emailAddress", 123, sampleAddress);
+//            AdminDashboardController ADC = loader.getController();
+//            ADC.dashboardController(loggedInUser);
+//        } else {
+//            labelWarning.setText("Invalid username or password");
+//        }
+//
+//        if (loggedInUser == null) {
+//            labelWarning.setText("Invalid username/password combination");
+//        }
+        Admin loggedInUser = Admin.getInstance("admin", "testing", "emailAddress", 123, sampleAddress);
+        AdminDashboard_Controller ADC = loader.getController();
+        ADC.dashboardController(loggedInUser);
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
         this.stage.show();
     }
+
+    private boolean authenticate(String username, String password) {
+        // Placeholder for actual authentication logic
+        return "admin".equals(username) && "testing".equals(password);
+    }
+
+    //scene controller
+    public void logout(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(this.getClass().getResource("main_portal.fxml"));
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
+    }
+
+
+
     public void displayUserRegister(ActionEvent event) {
 
         Parent root = null;
         try {
-            root = (Parent) FXMLLoader.load(this.getClass().getResource("admin_register.fxml"));
+            root = FXMLLoader.load(this.getClass().getResource("admin_register.fxml"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

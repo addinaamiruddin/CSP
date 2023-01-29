@@ -28,13 +28,13 @@
         <Pane layoutX="231.0" layoutY="54.0" prefHeight="441.0" prefWidth="690.0" style="-fx-background-color: #f2f2f2; -fx-background-radius: 10.0;">
             <children>
                 <Line endX="589.3999633789062" layoutX="101.0" layoutY="26.0" startX="-100.0" stroke="WHITE" strokeWidth="3.0" />
-                <TableView fx:id="table" layoutX="83.0" layoutY="70.0" prefHeight="200.0" prefWidth="378.0">
+                <TableView fx:id="table" layoutX="80.0" layoutY="45.0" prefHeight="310.0" prefWidth="530.0">
                     <columns>
-                        <TableColumn fx:id="index" prefWidth="75.0" text="Index" />
-                        <TableColumn fx:id="status" prefWidth="75.0" text="Status" />
-                        <TableColumn fx:id="names" prefWidth="75.0" text="Name" />
-                        <TableColumn fx:id="types" prefWidth="75.0" text="Types" />
-                  <TableColumn fx:id="level" prefWidth="75.0" text="Level" />
+                        <TableColumn fx:id="indexColumn" prefWidth="75.0" text="Index" />
+                        <TableColumn fx:id="statusColumn" prefWidth="75.0" text="Status" />
+                        <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
+                        <TableColumn fx:id="typesColumn" prefWidth="75.0" text="Types" />
+                  <TableColumn fx:id="levelColumn" prefWidth="75.0" text="Level" />
 
                     </columns>
                 </TableView>

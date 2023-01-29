@@ -1,30 +1,24 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 package com.example.csp;
 
-import java.io.IOException;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
+        import java.io.IOException;
+        import javafx.event.ActionEvent;
+        import javafx.fxml.FXML;
+        import javafx.fxml.FXMLLoader;
+        import javafx.scene.Node;
+        import javafx.scene.Parent;
+        import javafx.scene.Scene;
+        import javafx.scene.control.Hyperlink;
+        import javafx.scene.control.Label;
+        import javafx.stage.Stage;
 
-public class AdminDashboardController {
+public class AdminDashboard_Controller {
     @FXML
-    private Label label_faculty_name;
+    private Hyperlink label_faculty_name;
     private Stage stage;
     private Scene scene;
     private Parent root;
     private User loggedInUser;
 
-    public AdminDashboardController() {
-    }
 
     public void dashboardController(User loggedInUser) {
         this.loggedInUser=loggedInUser;
@@ -40,7 +34,14 @@ public class AdminDashboardController {
     }
 
     public void switchToAddCourse(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("admin_add_course.fxml"));
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("admin_add_course.fxml"));
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        AdminAddCourseController controller = loader.getController();
+        controller.dashboardController(loggedInUser);
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
@@ -48,7 +49,14 @@ public class AdminDashboardController {
     }
 
     public void switchToDeleteCourse(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("admin_delete_course.fxml"));
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("admin_delete_course.fxml"));
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        AdminManageCourseController controller = loader.getController();
+        controller.dashboardController(loggedInUser);
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
@@ -65,6 +73,14 @@ public class AdminDashboardController {
 
     public void switchToViewCourse(ActionEvent event) throws IOException {
         Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("admin_view_course.fxml"));
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
+    }
+
+    public void switchToDashboard(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(this.getClass().getResource("admin_dashboard.fxml"));
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);

@@ -21,7 +21,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class StudRegisterController implements Initializable {
+public class StudRegisterController {
 
     private Stage stage;
     private Scene scene;
@@ -106,20 +106,22 @@ public class StudRegisterController implements Initializable {
         Student dummyStud = Student.getInstance("johndoe", "123", "johndoe@example.com", 555 - 555 - 5555, theAddress);
         Student.listOfStudents.add(dummyStud);
 
-//        System.out.println(listOfStudents.indexOf());
-
         for (Student student : Student.listOfStudents) {
             System.out.println("Username: " + student.getUsername() + ", Password: " + student.getPassword());
         }
 
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_dashboard.fxml"));
-        this.root = loader.load();
+        try {
+            root = (Parent) loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         StudentDashboardController SDC = loader.getController();
         SDC.dashboardController(registeredStudent);
-        Scene scene = new Scene(root);
-        Stage stage1 = new Stage();
-        stage1.setScene(scene);
-        stage1.show();
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
     }
 
     private void adminDashboardController(Student newStudent) {
@@ -131,11 +133,6 @@ public class StudRegisterController implements Initializable {
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
         this.stage.show();
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
     }
 
     public void switchToLogin(ActionEvent event) throws IOException {

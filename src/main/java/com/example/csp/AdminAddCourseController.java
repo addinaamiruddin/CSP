@@ -1,5 +1,10 @@
 package com.example.csp;
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.ResourceBundle;
+
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,52 +17,43 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ResourceBundle;
-
-// use for admin_delete_course.fxml
-// use for admin_view_course.fxml
-public class AdminManageCourseController implements Initializable {
+// use for admin_add_course.fxml
+public class AdminAddCourseController implements Initializable {
     @FXML
-    Label label_faculty_name, label_courseName, label_courseId, label_feeStructure, label_maxStud, label_medStudy, label_fac, label_courseDuration, label_subjTaught, label_EO, label_scholarship, label_furtherStudies;
+    Label label_faculty_name;
     private Stage stage;
     private Scene scene;
     private Parent root;
     private SceneController SC;
-    @FXML
     private TableView<Course> tableView;
-    @FXML
     private TableColumn<Course, String> courseIdColumn;
-    @FXML
     private TableColumn<Course, String> courseNameColumn;
     private TableColumn<Course, String[]> subjectTaughtColumn;
-    @FXML
     private TableColumn<Course, Integer> courseDurationColumn;
     private TableColumn<Course, String[]> employmentOpportunitiesColumn;
     private TableColumn<Course, String[]> scopeForFurtherStudiesColumn;
     private TableColumn<Course, Boolean> scholarshipFacilitiesColumn;
-    @FXML
     private TableColumn<Course, Integer> feeStructureColumn;
-    @FXML
     private TableColumn<Course, Integer> maximumStudentColumn;
-    @FXML
     private TableColumn<Course, MediumStudy> mediumStudyColumn;
-    @FXML
     private TableColumn<Course, Faculty> facultyColumn;
     @FXML
-    private TextField courseIdInput, courseNameInput, subjectTaughtInput, courseDurationInput, employmentOpportunitiesInput, scopeInput, feeStructureInput, maxStudInput, facInput;
-
+    private TextField courseIdInput, courseNameInput, subjectTaughtInput, courseDurationInput, employmentOpportunitiesInput, scopeInput, feeStructureInput, maxStudInput;
+    @FXML
+    private ChoiceBox<courseLevel> MOSinput;
+    @FXML
+    private ChoiceBox<Faculty> facInput;
     @FXML
     private ChoiceBox<String> scholarshipFacInput, mediumStudyInput;
-    private static List<Course> courses = Course.getAllCourses();
+
     private String[] status = {"AVAILABLE","UNAVAILABLE"};
     private User loggedInUser=null;
 
-    public AdminManageCourseController() {
+    public static String[] getMOS(Class<? extends Enum<?>> e) {
+        return Arrays.stream(e.getEnumConstants()).map(Enum::name).toArray(String[]::new);
+    }
+
+    public AdminAddCourseController() {
     }
 
     public void dashboardController(User loggedInUser) {
@@ -67,13 +63,32 @@ public class AdminManageCourseController implements Initializable {
 
     // in view_course
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        courseIdColumn.setCellValueFactory(new PropertyValueFactory<Course, String>("courseId"));
-        courseNameColumn.setCellValueFactory(new PropertyValueFactory<Course, String>("courseName"));
-        courseDurationColumn.setCellValueFactory(new PropertyValueFactory<Course, Integer>("courseDuration"));
-        feeStructureColumn.setCellValueFactory(new PropertyValueFactory<Course, Integer>("feeStructure"));
-        maximumStudentColumn.setCellValueFactory(new PropertyValueFactory<Course, Integer>("maximumStudent"));
-        mediumStudyColumn.setCellValueFactory(new PropertyValueFactory<Course, MediumStudy>("mediumStudy"));
-        facultyColumn.setCellValueFactory(new PropertyValueFactory<Course, Faculty>("faculty"));
+        scholarshipFacInput.getItems().addAll(status);
+        MOSinput.getItems().setAll(courseLevel.values());
+        facInput.getItems().setAll(Faculty.values());
+    }
+
+    // in add_course
+    @FXML
+    void submit(ActionEvent event) {
+        Course newCourse = new Course(courseIdInput.getText(),
+                courseNameInput.getText(),
+                new String[]{subjectTaughtInput.getText()},
+                Integer.parseInt(courseDurationInput.getText()),
+                new String[]{employmentOpportunitiesInput.getText()},
+                new String[]{scopeInput.getText()},
+                Boolean.parseBoolean(scholarshipFacInput.getValue()),
+                Integer.parseInt(feeStructureInput.getText()),
+                Integer.parseInt(maxStudInput.getText()), MOSinput.getValue(), facInput.getValue());
+
+        ObservableList<Course> courses = tableView.getItems();
+        Course.addCourse(newCourse);
+
+        try {
+            switchToViewCourse(event);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     // in delete_course

@@ -23,7 +23,6 @@ public class StudLoginController {
     @FXML
     private TextField input_password;
     User loggedInUser = null;
-//    static List<Student> listOfStudents = new ArrayList<Student>();
 
     @FXML
     private Label labelWarning;
@@ -40,15 +39,9 @@ public class StudLoginController {
             System.out.println("helloUsername: " + student.getUsername() + ", Password: " + student.getPassword());
         }
 
-//        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_dashboard.fxml"));
-//        try {
-//            this.root = loader.load();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_dashboard.fxml"));
         try {
-            root = (Parent) loader.load();
+            root = loader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -84,13 +77,7 @@ public class StudLoginController {
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
         this.stage.show();
-//
-//        StudentDashboardController SDC = loader.getController();
-//        SDC.dashboardController(loggedInUser);
-//        Scene scene = new Scene(root);
-//        Stage stage1 = new Stage();
-//        stage1.setScene(scene);
-//        stage1.show();
+
     }
 
     private boolean authenticate(String username, String password) {
@@ -100,7 +87,7 @@ public class StudLoginController {
 
     //scene controller
     public void logout(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("main_portal.fxml"));
+        Parent root = FXMLLoader.load(this.getClass().getResource("main_portal.fxml"));
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);

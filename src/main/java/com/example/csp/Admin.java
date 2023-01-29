@@ -6,6 +6,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 // Admin is the subclass of user (INHERITANCE).
@@ -16,6 +18,7 @@ public final class Admin extends User {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    public static List<Admin> listOfAdmins = new ArrayList<Admin>();
 
     // set it to private to ensure that only one instance of the Admin class is
     // created.

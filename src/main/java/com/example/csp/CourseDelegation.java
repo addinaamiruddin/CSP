@@ -3,7 +3,6 @@ package com.example.csp;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
-import java.util.List;
 
 
 /* The CourseDelegation class implements the DELEGATION DESIGN PATTERN to separate the responsibilities of handling course add, remove, and update actions for Admin and Student users.
@@ -49,7 +48,7 @@ public class CourseDelegation {
         if (loggedInUser instanceof Admin) {
             // Admin implementation of adding a course
             AdminDashboardDisplayStrategy adminStrategy = new AdminDashboardDisplayStrategy();
-            AdminManageCourseController AMCC = new AdminManageCourseController();
+            AdminAddCourseController AMCC = new AdminAddCourseController();
             try {
                 AMCC.switchToAddCourse(new ActionEvent());
             } catch (IOException e) {
@@ -70,7 +69,7 @@ public class CourseDelegation {
     public void handleUpdateCourse(User user) {
         if (user instanceof Admin) {
             AdminDashboardDisplayStrategy adminStrategy = new AdminDashboardDisplayStrategy();
-            AdminManageCourseController AMCC = new AdminManageCourseController();
+            AdminAddCourseController AMCC = new AdminAddCourseController();
             try {
                 AMCC.switchToUpdateCourse(new ActionEvent());
             } catch (IOException e) {
@@ -144,7 +143,7 @@ public class CourseDelegation {
         StudentDashboardDisplayStrategy studStrategy = new StudentDashboardDisplayStrategy();
 
         if (loggedInUser instanceof Admin) {
-            AdminManageCourseController AMCC = new AdminManageCourseController();
+            AdminAddCourseController AMCC = new AdminAddCourseController();
             AMCC.removeCourse(new ActionEvent());
         } else if (loggedInUser instanceof Student) {
             StudentManageCourseController SMCC = new StudentManageCourseController();
