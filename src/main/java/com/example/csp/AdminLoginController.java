@@ -69,9 +69,19 @@ public class AdminLoginController {
 //        if (loggedInUser == null) {
 //            labelWarning.setText("Invalid username/password combination");
 //        }
-        Admin loggedInUser = Admin.getInstance("admin", "testing", "emailAddress", 123, sampleAddress);
-        AdminDashboard_Controller ADC = loader.getController();
-        ADC.dashboardController(loggedInUser);
+
+
+        if (authenticate(inpUser, inpPass)) {
+            Admin loggedInUser = Admin.getInstance("admin", "testing", "emailAddress", 123, sampleAddress);
+            AdminDashboard_Controller ADC = loader.getController();
+            ADC.dashboardController(loggedInUser);
+        } else {
+            labelWarning.setText("Invalid username or password");
+        }
+
+        if (loggedInUser == null) {
+            labelWarning.setText("Invalid username/password combination");
+        }
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
@@ -91,8 +101,6 @@ public class AdminLoginController {
         this.stage.setScene(this.scene);
         this.stage.show();
     }
-
-
 
     public void displayUserRegister(ActionEvent event) {
 

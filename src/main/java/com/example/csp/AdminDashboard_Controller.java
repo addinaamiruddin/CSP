@@ -25,14 +25,15 @@ public class AdminDashboard_Controller {
     }
 
     public void logOut(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("main_portal.fxml"));
+        Parent root = FXMLLoader.load(this.getClass().getResource("main_portal.fxml"));
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
         this.stage.show();
     }
 
-    public void switchToAddCourse(ActionEvent event) throws IOException {
+    public void clickAddCourse(ActionEvent event) {
+
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("admin_add_course.fxml"));
         try {
             root = loader.load();
@@ -47,7 +48,7 @@ public class AdminDashboard_Controller {
         this.stage.show();
     }
 
-    public void switchToDeleteCourse(ActionEvent event) throws IOException {
+    public void clickDeleteCourse(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("admin_delete_course.fxml"));
         try {
             root = loader.load();
@@ -62,24 +63,46 @@ public class AdminDashboard_Controller {
         this.stage.show();
     }
 
-    public void switchToUpdateCourse(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("admin_update_course.fxml"));
+    public void clickViewCourse(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("admin_view_course.fxml"));
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        AdminViewCourseController controller = loader.getController();
+        controller.dashboardController(loggedInUser);
+
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
         this.stage.show();
     }
 
-    public void switchToViewCourse(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("admin_view_course.fxml"));
+    public void clickUpdateCourse(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("admin_update_course.fxml"));
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        AdminUpdateCourseController controller = loader.getController();
+        controller.dashboardController(loggedInUser);
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
         this.stage.show();
     }
 
-    public void switchToDashboard(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(this.getClass().getResource("admin_dashboard.fxml"));
+    public void switchToDashboard(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("admin_dashboard.fxml"));
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        AdminDashboard_Controller controller = loader.getController();
+        controller.dashboardController(loggedInUser);
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);

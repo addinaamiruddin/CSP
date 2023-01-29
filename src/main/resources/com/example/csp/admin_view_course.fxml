@@ -147,27 +147,23 @@
                      </font>
                   </Label>
                   <Label text=":" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-                  <Label fx:id="label_courseId" text="CS101" GridPane.columnIndex="2" />
-                  <Label fx:id="label_courseName2" text="Computer Science" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Label fx:id="label_feeStructure" text="30000" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Label fx:id="label_maxStud" text="1200" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                  <Label fx:id="label_medStudy" text="DIPLOMA, UNDERGRADUATE, POSTGRADUATE" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                  <Label fx:id="label_fac" text="Computer Science" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                  <Label fx:id="label_courseDuration" text="3 Years" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                  <Label fx:id="label_subjTaught" text="Computer Architecture and Organization, Computer Networks, Database Systems, Software Engineering, Web Development, Artificial Intelligence" wrapText="true" GridPane.columnIndex="5" />
-                  <Label fx:id="label_EO" text="Software Developer, Web Designer" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                  <Label fx:id="label_scholarship" text="AVAILABLE" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-                  <Label fx:id="label_furtherStudies" text="AVAILABLE" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+                  <Label fx:id="label_courseId" GridPane.columnIndex="2" />
+                  <Label fx:id="label_courseName" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Label fx:id="label_feeStructure" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Label fx:id="label_maxStud" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Label fx:id="label_medStudy" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                  <Label fx:id="label_fac" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <Label fx:id="label_courseDuration" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                  <Label fx:id="label_subjTaught" wrapText="true" GridPane.columnIndex="5" />
+                  <Label fx:id="label_EO" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                  <Label fx:id="label_scholarship" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                  <Label fx:id="label_furtherStudies" GridPane.columnIndex="5" GridPane.rowIndex="6" />
                </children>
             </GridPane>
             <Line endX="735.0" layoutX="77.0" layoutY="21.0" startX="-84.80000305175781" stroke="#ffffffd7" strokeWidth="3.0" />
+            <ChoiceBox fx:id="CB_course" layoutX="228.0" layoutY="-16.0" prefHeight="26.0" prefWidth="367.0" />
          </children></Pane>
         <Button layoutX="49.0" layoutY="476.0" mnemonicParsing="false" onAction="#logOut" text="LOGOUT" />
-      <Label fx:id="label_courseName" alignment="CENTER" layoutX="259.0" layoutY="102.0" prefHeight="26.0" prefWidth="441.0" text="Computer Science" underline="true">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Label>
 
 
     </children>

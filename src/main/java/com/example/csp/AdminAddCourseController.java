@@ -14,7 +14,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 // use for admin_add_course.fxml
@@ -24,25 +23,24 @@ public class AdminAddCourseController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    private SceneController SC;
-    private TableView<Course> tableView;
-    private TableColumn<Course, String> courseIdColumn;
-    private TableColumn<Course, String> courseNameColumn;
-    private TableColumn<Course, String[]> subjectTaughtColumn;
-    private TableColumn<Course, Integer> courseDurationColumn;
-    private TableColumn<Course, String[]> employmentOpportunitiesColumn;
-    private TableColumn<Course, String[]> scopeForFurtherStudiesColumn;
-    private TableColumn<Course, Boolean> scholarshipFacilitiesColumn;
-    private TableColumn<Course, Integer> feeStructureColumn;
-    private TableColumn<Course, Integer> maximumStudentColumn;
-    private TableColumn<Course, MediumStudy> mediumStudyColumn;
-    private TableColumn<Course, Faculty> facultyColumn;
+//    private TableView<Course> tableView;
+//    private TableColumn<Course, String> courseIdColumn;
+//    private TableColumn<Course, String> courseNameColumn;
+//    private TableColumn<Course, String[]> subjectTaughtColumn;
+//    private TableColumn<Course, Integer> courseDurationColumn;
+//    private TableColumn<Course, String[]> employmentOpportunitiesColumn;
+//    private TableColumn<Course, String[]> scopeForFurtherStudiesColumn;
+//    private TableColumn<Course, Boolean> scholarshipFacilitiesColumn;
+//    private TableColumn<Course, Integer> feeStructureColumn;
+//    private TableColumn<Course, Integer> maximumStudentColumn;
+//    private TableColumn<Course, MediumStudy> mediumStudyColumn;
+//    private TableColumn<Course, Faculty> facultyColumn;
     @FXML
     private TextField courseIdInput, courseNameInput, subjectTaughtInput, courseDurationInput, employmentOpportunitiesInput, scopeInput, feeStructureInput, maxStudInput;
     @FXML
     private ChoiceBox<courseLevel> MOSinput;
     @FXML
-    private ChoiceBox<Faculty> facInput;
+    private ChoiceBox<Faculty> CB_facInput;
     @FXML
     private ChoiceBox<String> scholarshipFacInput, mediumStudyInput;
 
@@ -63,9 +61,10 @@ public class AdminAddCourseController implements Initializable {
 
     // in view_course
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         scholarshipFacInput.getItems().addAll(status);
         MOSinput.getItems().setAll(courseLevel.values());
-        facInput.getItems().setAll(Faculty.values());
+        CB_facInput.getItems().setAll(Faculty.values());
     }
 
     // in add_course
@@ -79,10 +78,14 @@ public class AdminAddCourseController implements Initializable {
                 new String[]{scopeInput.getText()},
                 Boolean.parseBoolean(scholarshipFacInput.getValue()),
                 Integer.parseInt(feeStructureInput.getText()),
-                Integer.parseInt(maxStudInput.getText()), MOSinput.getValue(), facInput.getValue());
+                Integer.parseInt(maxStudInput.getText()), MOSinput.getValue(), CB_facInput.getValue());
 
-        ObservableList<Course> courses = null;
-        Course.addCourse(newCourse);
+//        ObservableList<Course> courses = null;
+////        courses.add(newCourse);
+//        Course.addCourse(newCourse);
+        AdminDeleteCourseController ADCC = new AdminDeleteCourseController();
+        ObservableList<Course> courses = ADCC.getOLCourses();;
+        courses.add(newCourse);
 
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("admin_delete_course.fxml"));
         try {
@@ -91,7 +94,7 @@ public class AdminAddCourseController implements Initializable {
             throw new RuntimeException(e);
         }
         AdminDeleteCourseController controller = loader.getController();
-        controller.dashboardController(loggedInUser, courses);
+        controller.dashboardController(loggedInUser);
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
@@ -99,10 +102,10 @@ public class AdminAddCourseController implements Initializable {
     }
 
     // in delete_course
-    void removeCourse(ActionEvent event) {
-        int selectedID = tableView.getSelectionModel().getSelectedIndex();
-        tableView.getItems().remove(selectedID);
-    }
+//    void removeCourse(ActionEvent event) {
+//        int selectedID = tableView.getSelectionModel().getSelectedIndex();
+//        tableView.getItems().remove(selectedID);
+//    }
 
     public void displayName(User loggedInUser) {
         this.label_faculty_name.setText(loggedInUser.getUsername());
@@ -170,7 +173,7 @@ public class AdminAddCourseController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        AdminDeleteCourseController controller = loader.getController();
+        AdminUpdateCourseController controller = loader.getController();
         controller.dashboardController(loggedInUser);
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);

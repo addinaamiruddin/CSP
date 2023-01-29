@@ -82,7 +82,7 @@
             <TextField fx:id="maxStudInput" GridPane.columnIndex="4" GridPane.rowIndex="1" />
             <ChoiceBox fx:id="scholarshipFacInput" prefHeight="26.0" prefWidth="218.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
             <ChoiceBox fx:id="MOSinput" prefHeight="26.0" prefWidth="229.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-            <ChoiceBox fx:id="facInput" prefHeight="26.0" prefWidth="223.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+            <ChoiceBox fx:id="CB_facInput" prefHeight="26.0" prefWidth="223.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
          </children>
       </GridPane>
    </children>

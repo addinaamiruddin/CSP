@@ -45,22 +45,22 @@
       </Label>
       <AnchorPane layoutX="183.0" layoutY="240.0">
          <children>
-            <Button fx:id="btn_add_course" mnemonicParsing="false" onAction="#switchToAddCourse" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #6CA74B;" text="ADD COURSE" textFill="WHITE">
+            <Button fx:id="btn_add_course" mnemonicParsing="false" onAction="#clickAddCourse" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #6CA74B;" text="ADD COURSE" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btn_update_course" layoutX="144.0" mnemonicParsing="false" onAction="#switchToUpdateCourse" prefHeight="35.0" prefWidth="139.0" style="-fx-background-color: #6CA74B;" text="UPDATE COURSE" textFill="WHITE">
+            <Button fx:id="btn_update_course" layoutX="144.0" mnemonicParsing="false" onAction="#clickUpdateCourse" prefHeight="35.0" prefWidth="139.0" style="-fx-background-color: #6CA74B;" text="UPDATE COURSE" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btn_delete_course" layoutX="309.0" mnemonicParsing="false" onAction="#switchToDeleteCourse" prefHeight="35.0" prefWidth="139.0" style="-fx-background-color: #6CA74B;" text="DELETE COURSE" textFill="WHITE">
+            <Button fx:id="btn_delete_course" layoutX="309.0" mnemonicParsing="false" onAction="#clickDeleteCourse" prefHeight="35.0" prefWidth="139.0" style="-fx-background-color: #6CA74B;" text="DELETE COURSE" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btn_view_course" layoutX="471.0" mnemonicParsing="false" onAction="#switchToViewCourse" prefHeight="35.0" prefWidth="126.0" style="-fx-background-color: #6CA74B;" text="VIEW COURSE" textFill="WHITE">
+            <Button fx:id="btn_view_course" layoutX="471.0" mnemonicParsing="false" onAction="#clickViewCourse" prefHeight="35.0" prefWidth="126.0" style="-fx-background-color: #6CA74B;" text="VIEW COURSE" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>

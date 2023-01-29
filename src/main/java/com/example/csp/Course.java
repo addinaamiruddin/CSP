@@ -1,4 +1,5 @@
 package com.example.csp;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,6 +37,7 @@ enum Faculty {
 // The logic to handle action course, add course, update course & delete course
 // is inside courseDelegation class.
 public class Course extends CourseDelegation {
+    private static List<Course> sampleCourses = new ArrayList<>();
     private String courseId;
     private String courseName;
     private String[] subjectTaught;
@@ -88,6 +90,10 @@ public class Course extends CourseDelegation {
 
     public String getCourseName() {
         return courseName;
+    }
+
+    public boolean getScholarship() {
+        return scholarshipFacilities;
     }
 
     public void setCourseName(String courseName) {
@@ -167,7 +173,17 @@ public class Course extends CourseDelegation {
     }
 
     public static List<Course> getCourses() {
-        return courses;
+        sampleCourses.add(new Course("CS101", "Computer Science", new String[]{"Data Structure", "Object Oriented Programming", "Algorithm Design"}, 3, new String[]{"Developer", "Cloud Architect"}, new String[]{"PHD", "DIPLOMA"}, true, 36000, 120, com.example.csp.courseLevel.FOUNDATION, Faculty.CSE));
+        sampleCourses.add(new Course("EE32", "Electrical Engineering", new String[]{"Engineering Mathematics", "Circuits Theory", "Analogue Electronics"}, 3, new String[]{"Engineer", "Technician Specialist"}, new String[]{"PHD", "DIPLOMA"}, true, 45000, 120, com.example.csp.courseLevel.FOUNDATION, Faculty.EEE));
+        sampleCourses.add(new Course("CE12", "Civil Engineering", new String[]{"Material Science and Engineering", "Coastal Engineering", "Construction Engineering"}, 3, new String[]{"Engineer", "Civil Engineer"}, new String[]{"PHD", "DIPLOMA"}, true, 54000, 120, com.example.csp.courseLevel.FOUNDATION, Faculty.CIVIL));
+        sampleCourses.add(new Course("ME45", "Mechanical Engineering", new String[]{"Engineering Mathematics", "Thermodynamics", "Fluid Mechanics."}, 3, new String[]{"Engineer", "Manufacturing Engineer"}, new String[]{"POSTGRADUATE", "PHD"}, true, 23000, 120, courseLevel.UNDERGRADUATE, Faculty.MECHANICAL));
+
+        return sampleCourses;
+    }
+
+    @Override
+    public String toString() {
+        return courseName;
     }
 
     public static void setCourses(List<Course> courses) {

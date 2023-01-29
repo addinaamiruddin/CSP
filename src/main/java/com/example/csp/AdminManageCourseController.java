@@ -27,35 +27,33 @@ public class AdminManageCourseController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    private SceneController SC;
+    @FXML
+    private ChoiceBox<courseLevel> MOSinput;
+    @FXML
+    private ChoiceBox<Faculty> CB_facInput;
     @FXML
     private TableView<Course> tableView;
     @FXML
     private TableColumn<Course, String> courseIdColumn;
     @FXML
     private TableColumn<Course, String> courseNameColumn;
-    private TableColumn<Course, String[]> subjectTaughtColumn;
     @FXML
     private TableColumn<Course, Integer> courseDurationColumn;
-    private TableColumn<Course, String[]> employmentOpportunitiesColumn;
-    private TableColumn<Course, String[]> scopeForFurtherStudiesColumn;
-    private TableColumn<Course, Boolean> scholarshipFacilitiesColumn;
     @FXML
-    private TableColumn<Course, Integer> feeStructureColumn;
+    private TableColumn<Course, Integer> courseFeeColumn;
     @FXML
-    private TableColumn<Course, Integer> maximumStudentColumn;
+    private TableColumn<Course, MediumStudy> MOSColumn;
     @FXML
-    private TableColumn<Course, MediumStudy> mediumStudyColumn;
-    @FXML
-    private TableColumn<Course, Faculty> facultyColumn;
+    private TableColumn<Course, Faculty> facColumn;
+    private User loggedInUser;
+    private ObservableList<Course> courses;
     @FXML
     private TextField courseIdInput, courseNameInput, subjectTaughtInput, courseDurationInput, employmentOpportunitiesInput, scopeInput, feeStructureInput, maxStudInput, facInput;
 
     @FXML
     private ChoiceBox<String> scholarshipFacInput, mediumStudyInput;
-    private static List<Course> courses = Course.getAllCourses();
+//    private static List<Course> courses = Course.getAllCourses();
     private String[] status = {"AVAILABLE","UNAVAILABLE"};
-    private User loggedInUser=null;
 
     public AdminManageCourseController() {
     }
@@ -65,27 +63,66 @@ public class AdminManageCourseController implements Initializable {
         label_faculty_name.setText(loggedInUser.displayUserInformation(loggedInUser));
     }
 
-    // in view_course
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        courseIdColumn.setCellValueFactory(new PropertyValueFactory<Course, String>("courseId"));
-        courseNameColumn.setCellValueFactory(new PropertyValueFactory<Course, String>("courseName"));
-        courseDurationColumn.setCellValueFactory(new PropertyValueFactory<Course, Integer>("courseDuration"));
-        feeStructureColumn.setCellValueFactory(new PropertyValueFactory<Course, Integer>("feeStructure"));
-        maximumStudentColumn.setCellValueFactory(new PropertyValueFactory<Course, Integer>("maximumStudent"));
-        mediumStudyColumn.setCellValueFactory(new PropertyValueFactory<Course, MediumStudy>("mediumStudy"));
-        facultyColumn.setCellValueFactory(new PropertyValueFactory<Course, Faculty>("faculty"));
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // for admin_add_course.fxml
+        scholarshipFacInput.getItems().addAll(status);
+        MOSinput.getItems().setAll(courseLevel.values());
+        CB_facInput.getItems().setAll(Faculty.values());
+
+        // for admin_delete_course.fxml
+//        courseIdColumn.setCellValueFactory(new PropertyValueFactory<>("courseId"));
+//        courseNameColumn.setCellValueFactory(new PropertyValueFactory<>("courseName"));
+//        courseDurationColumn.setCellValueFactory(new PropertyValueFactory<>("courseDuration"));
+//        courseFeeColumn.setCellValueFactory(new PropertyValueFactory<>("feeStructure"));
+//        MOSColumn.setCellValueFactory(new PropertyValueFactory<>("mediumStudy"));
+//        facColumn.setCellValueFactory(new PropertyValueFactory<>("faculty"));
+//
+//        Course newRow1 = new Course("CS101", "Computer Science", new String[]{"Data Structure & Algorithm"}, 3, new String[]{"Software Engineer"}, new String[]{"AVAILABLE"}, true, 60000, 1200, com.example.csp.courseLevel.FOUNDATION, Faculty.CSE );
+//
+//        this.courses.add(newRow1);
+//        tableView.setItems(this.courses);
     }
 
-    // in delete_course
+    // for add_course.fxml
+    @FXML
+    void submit(ActionEvent event) {
+        Course newCourse = new Course(courseIdInput.getText(),
+                courseNameInput.getText(),
+                new String[]{subjectTaughtInput.getText()},
+                Integer.parseInt(courseDurationInput.getText()),
+                new String[]{employmentOpportunitiesInput.getText()},
+                new String[]{scopeInput.getText()},
+                Boolean.parseBoolean(scholarshipFacInput.getValue()),
+                Integer.parseInt(feeStructureInput.getText()),
+                Integer.parseInt(maxStudInput.getText()), MOSinput.getValue(), CB_facInput.getValue());
+
+        ObservableList<Course> courses = null;
+//        courses.add(newCourse);
+        Course.addCourse(newCourse);
+
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("admin_delete_course.fxml"));
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        AdminManageCourseController controller = loader.getController();
+        controller.dashboardController(loggedInUser);
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
+    }
+
+    // for delete_course.fxml
+    @FXML
     void removeCourse(ActionEvent event) {
         int selectedID = tableView.getSelectionModel().getSelectedIndex();
         tableView.getItems().remove(selectedID);
     }
 
-    public void displayName(String username) {
-        this.label_faculty_name.setText(username);
-    }
-
+    // scene controllers
     public void logOut(ActionEvent event) throws IOException {
         Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("main_portal.fxml"));
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -94,40 +131,62 @@ public class AdminManageCourseController implements Initializable {
         this.stage.show();
     }
 
-    public void switchToAddCourse(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("admin_add_course.fxml"));
+    public void switchToAddCourse(ActionEvent event) {
+
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("admin_add_course.fxml"));
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        AdminAddCourseController controller = loader.getController();
+        controller.dashboardController(loggedInUser);
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
         this.stage.show();
     }
 
-    public void switchToDeleteCourse(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("admin_view_course.fxml"));
+    public void switchToDeleteCourse(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("admin_delete_course.fxml"));
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        AdminDeleteCourseController controller = loader.getController();
+        controller.dashboardController(loggedInUser);
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
         this.stage.show();
     }
 
-    public void switchToUpdateCourse(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("admin_update_course.fxml"));
+    public void switchToViewCourse(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("admin_view_course.fxml"));
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        AdminViewCourseController controller = loader.getController();
+        controller.dashboardController(loggedInUser);
+
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
         this.stage.show();
     }
 
-    public void switchToViewCourse(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("admin_delete_course.fxml"));
-        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        this.scene = new Scene(root);
-        this.stage.setScene(this.scene);
-        this.stage.show();
-    }
-
-    public void switchToDashboard(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("admin_dashboard.fxml"));
+    public void switchToUpdateCourse(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("admin_update_course.fxml"));
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        AdminUpdateCourseController controller = loader.getController();
+        controller.dashboardController(loggedInUser);
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);

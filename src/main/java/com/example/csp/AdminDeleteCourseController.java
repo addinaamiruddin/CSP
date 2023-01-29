@@ -37,7 +37,6 @@ public class AdminDeleteCourseController implements Initializable {
     private TableColumn<Course, Faculty> facColumn;
     private User loggedInUser;
     private Label label_faculty_name;
-    ObservableList<Course> sch = FXCollections.observableArrayList();
     private ObservableList<Course> courses;
     @FXML
     private Stage stage;
@@ -62,12 +61,16 @@ public class AdminDeleteCourseController implements Initializable {
 
         // Add a new row to the table
         Course newRow1 = new Course("CS101", "Computer Science", new String[]{"Data Structure & Algorithm"}, 3, new String[]{"Software Engineer"}, new String[]{"AVAILABLE"}, true, 60000, 1200, com.example.csp.courseLevel.FOUNDATION, Faculty.CSE );
-//        Scholarship newRow2 = new Course();
-//        Scholarship newRow3 = new Course();
-//        Scholarship newRow4 = new Course();
-//        tableView.setItems(newRow1);
-        this.courses.add(newRow1);
-        tableView.setItems(this.courses);
+        ObservableList<Course> courses = tableView.getItems();
+
+        courses.add(newRow1);
+        courses.add(Course.getCourses().get(1));
+//        courses.add()
+        tableView.setItems(courses);
+    }
+
+    public ObservableList<Course> getOLCourses() {
+        return courses;
     }
 
     @FXML
@@ -79,7 +82,7 @@ public class AdminDeleteCourseController implements Initializable {
     public void dashboardController(User loggedInUser) {
         this.courses=null;
         this.loggedInUser=loggedInUser;
-        label_faculty_name.setText(loggedInUser.displayUserInformation(loggedInUser));
+        label_faculty_name.setText(loggedInUser.getUsername());
     }
 
     public void switchToAddCourse(ActionEvent event) {
@@ -136,7 +139,7 @@ public class AdminDeleteCourseController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        AdminDeleteCourseController controller = loader.getController();
+        AdminUpdateCourseController controller = loader.getController();
         controller.dashboardController(loggedInUser);
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
