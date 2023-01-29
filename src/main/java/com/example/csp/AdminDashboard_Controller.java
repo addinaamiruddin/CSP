@@ -8,7 +8,6 @@ package com.example.csp;
         import javafx.scene.Parent;
         import javafx.scene.Scene;
         import javafx.scene.control.Hyperlink;
-        import javafx.scene.control.Label;
         import javafx.stage.Stage;
 
 public class AdminDashboard_Controller {
@@ -55,7 +54,7 @@ public class AdminDashboard_Controller {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        AdminManageCourseController controller = loader.getController();
+        AdminDeleteCourseController controller = loader.getController();
         controller.dashboardController(loggedInUser);
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);

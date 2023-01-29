@@ -194,7 +194,7 @@
                                 <Font size="13.0" />
                             </font>
                         </Hyperlink>
-                        <Hyperlink layoutX="10.0" layoutY="263.0" prefHeight="45.0" prefWidth="156.0" text="• Edit Student Information" textFill="WHITE" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <Hyperlink layoutX="10.0" layoutY="263.0" onAction="#switchToEditStudentInfo" prefHeight="45.0" prefWidth="156.0" text="• Edit Student Information" textFill="WHITE" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
                             <padding>
                                 <Insets left="15.0" />
                             </padding>

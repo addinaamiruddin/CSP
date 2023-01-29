@@ -91,11 +91,6 @@
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                  <Label fx:id="label_studID" text="1200000" GridPane.columnIndex="2">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
                   <TextField fx:id="TF_username" promptText="Username" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                   <TextField fx:id="TF_phoneNumber" promptText="Phone Number" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                   <TextField fx:id="TF_emailAddress" promptText="Email Address" GridPane.columnIndex="2" GridPane.rowIndex="3" />
@@ -104,6 +99,7 @@
                   <TextField fx:id="TF_postalCode" promptText="Postal Code" GridPane.columnIndex="2" GridPane.rowIndex="6" />
                   <TextField fx:id="TF_country" promptText="Country" GridPane.columnIndex="2" GridPane.rowIndex="8" />
                   <TextField fx:id="TF_state" promptText="State" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                  <Label fx:id="label_studID_NEW" text="XXXX" GridPane.columnIndex="2" />
                </children>
             </GridPane>
             <Button fx:id="save_button" layoutX="263.0" layoutY="364.0" mnemonicParsing="false" onAction="#saveBtn" prefHeight="38.0" prefWidth="166.0" style="-fx-background-color: navy;" text="SAVE INFORMATION" textFill="WHITE">

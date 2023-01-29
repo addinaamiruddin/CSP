@@ -19,10 +19,10 @@ public class StudInfoController {
     private Scene scene;
     private Parent root;
     @FXML
-    private Label label_studID, label_username, label_phoneNumber, label_emailAddress, label_address;
+    private Label label_studID, label_username, label_phoneNumber, label_emailAddress, label_address, label_studID_NEW;
     @FXML
     private TextField TF_username, TF_phoneNumber, TF_emailAddress, TF_street, TF_city, TF_state, TF_postalCode, TF_country;
-    private User loggedInUser;
+    private User loggedInUser=null;
     @FXML
     private Button save_edit, save_button, edit_button;
 
@@ -33,24 +33,35 @@ public class StudInfoController {
         label_username.setText(loggedInUser.getUsername());
         label_phoneNumber.setText(String.valueOf(loggedInUser.getPhoneNumber()));
         label_emailAddress.setText(loggedInUser.getEmailAddress());
-        label_emailAddress.setText(String.valueOf(loggedInUser.getSampleAddress()));
+        label_address.setText(String.valueOf(loggedInUser.getSampleAddress()));
     }
 
     public void studInfoEditController(User loggedInUser) {
         this.loggedInUser=loggedInUser;
+        String SID = String.valueOf(((Student)loggedInUser).getStudentId());
+        label_studID_NEW.setText(SID);
+    }
 
-        label_studID.setText(String.valueOf(((Student)loggedInUser).getStudentId()));
-
+    public void saveBtn(ActionEvent event) throws IOException {
         loggedInUser.setUsername(TF_username.getText());
+        if (TF_username.getText().isEmpty())
+        {
+            loggedInUser.setUsername(loggedInUser.getUsername());
+        }
         loggedInUser.setPhoneNumber(Integer.parseInt(TF_phoneNumber.getText()));
+        if (TF_phoneNumber.getText().isEmpty())
+        {
+            loggedInUser.setUsername(String.valueOf(loggedInUser.getPhoneNumber()));
+        }
         loggedInUser.setEmailAddress(TF_emailAddress.getText());
+        if (TF_emailAddress.getText().isEmpty())
+        {
+            loggedInUser.setUsername(loggedInUser.getEmailAddress());
+        }
 
         AddressInfo addressInfo = new AddressInfo(TF_street.getText(), TF_city.getText(), TF_state.getText(), TF_postalCode.getText(), TF_country.getText());
 
         loggedInUser.setAddressInfo(addressInfo);
-    }
-
-    public void saveBtn(ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_info.fxml"));
         try {
@@ -87,17 +98,14 @@ public class StudInfoController {
 
     //scene controller
     public void switchToCourseInfo(ActionEvent event) throws IOException {
-
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_add_course.fxml"));
         try {
-            root = (Parent) loader.load();
+            root = loader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
         StudentManageCourseController controller = loader.getController();
         controller.courseDisplay(loggedInUser);
-
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
@@ -124,14 +132,12 @@ public class StudInfoController {
     public void switchToScholarshipFacilities(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_scholarship_facilities.fxml"));
         try {
-            root = (Parent) loader.load();
+            root = loader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
         ScholarshipFacilitiesController controller = loader.getController();
         controller.scholarshipDisplay(loggedInUser);
-
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
@@ -158,14 +164,12 @@ public class StudInfoController {
     public void switchToStudentInformation(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_info.fxml"));
         try {
-            root = (Parent) loader.load();
+            root = loader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
         StudInfoController controller = loader.getController();
         controller.studInfoController(loggedInUser);
-
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
@@ -181,4 +185,18 @@ public class StudInfoController {
     }
 
 
+    public void switchToEditStudentInfo(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_edit_info.fxml"));
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        StudInfoController controller = loader.getController();
+        controller.studInfoEditController(loggedInUser);
+        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        this.scene = new Scene(root);
+        this.stage.setScene(this.scene);
+        this.stage.show();
+    }
 }

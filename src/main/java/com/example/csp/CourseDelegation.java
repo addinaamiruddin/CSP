@@ -16,30 +16,30 @@ public class CourseDelegation {
 
             // buttons for manage course
 
-            // btnAddCourse
-            adminStrategy.addCourse(loggedInUser);
-
-            // btnUpdateCourse
-            adminStrategy.updateCourse(loggedInUser);
-
-            // btnRemoveCourse
-            adminStrategy.removeCourse(loggedInUser);
-
-            // btn HOME
+//            // btnAddCourse
+//            adminStrategy.addCourse(loggedInUser);
+//
+//            // btnUpdateCourse
+//            adminStrategy.updateCourse(loggedInUser);
+//
+//            // btnRemoveCourse
+//            adminStrategy.removeCourse(loggedInUser);
+//
+//            // btn HOME
             adminStrategy.adminDashboard(loggedInUser);
 
         } else if (loggedInUser instanceof Student) {
             StudentDashboardDisplayStrategy studStrategy = new StudentDashboardDisplayStrategy();
 
-            // buttons for manage course
-
-            // btnAddCourse
-            studStrategy.addCourse(loggedInUser);
-
-            // btnRemoveCourse
-            studStrategy.removeCourse(loggedInUser);
-
-            // btn HOME
+//            // buttons for manage course
+//
+//            // btnAddCourse
+//            studStrategy.addCourse(loggedInUser);
+//
+//            // btnRemoveCourse
+//            studStrategy.removeCourse(loggedInUser);
+//
+//            // btn HOME
             studStrategy.studentDashboard(loggedInUser);
         }
     }
@@ -49,11 +49,7 @@ public class CourseDelegation {
             // Admin implementation of adding a course
             AdminDashboardDisplayStrategy adminStrategy = new AdminDashboardDisplayStrategy();
             AdminAddCourseController AMCC = new AdminAddCourseController();
-            try {
-                AMCC.switchToAddCourse(new ActionEvent());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            AMCC.switchToAddCourse(new ActionEvent());
         } else if (loggedInUser instanceof Student) {
             // Student implementation of adding a course
             StudentDashboardDisplayStrategy studStrategy = new StudentDashboardDisplayStrategy();
@@ -70,12 +66,8 @@ public class CourseDelegation {
         if (user instanceof Admin) {
             AdminDashboardDisplayStrategy adminStrategy = new AdminDashboardDisplayStrategy();
             AdminAddCourseController AMCC = new AdminAddCourseController();
-            try {
-                AMCC.switchToUpdateCourse(new ActionEvent());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-//            input = new Scanner(System.in); // Re-instantiate the input scanner object here
+            AMCC.switchToUpdateCourse(new ActionEvent());
+            //            input = new Scanner(System.in); // Re-instantiate the input scanner object here
 //
 //            // Admin implementation of updating a course
 //            System.out.print("\033[H\033[2J");

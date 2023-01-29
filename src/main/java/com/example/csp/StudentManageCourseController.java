@@ -35,16 +35,17 @@ public class StudentManageCourseController implements Initializable {
     private ChoiceBox<String> coursesInput;
     @FXML
     private ChoiceBox<courseLevel> MOSinput;
-    private final String[] courses = {"Computer Science","Civil Engineering","Mechanical Engineering"};
+    private final String[] courses = {"Computer Science","Civil Engineering","Mechanical Engineering", "Electrical and Computer Engineering", "Electrical Engineering"};
 //    private final String[] MOS = {"Foundation","Degree","Diploma"};
 //    private MediumStudy MOS = {MediumStudy.values()};
-
 
     private User loggedInUser;
     private int price;
 
     public StudentManageCourseController() {}
 
+
+    //scene controller
     public void switchToAddCourse(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("stud_add_course.fxml"));
@@ -57,30 +58,15 @@ public class StudentManageCourseController implements Initializable {
         window.show();
     }
 
-    public void switchToUpdateCourse(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("stud_update_course.fxml"));
-        Parent parent = loader.load();
-
-        //This line gets the Stage information
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        window.setScene(parent.getScene());
-        window.show();
-    }
-
-
-    //scene controller
     public void switchToCourseInfo(ActionEvent event) throws IOException {
-        Parent root = (Parent) FXMLLoader.load(this.getClass().getResource("stud_add_course.fxml"));
-        this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        this.scene = new Scene(root);
-        this.stage.setScene(this.scene);
-        this.stage.show();
-    }
-
-    public void switchToEditCourseInfo(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("stud_edit_course_info.fxml"));
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_add_course.fxml"));
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        StudentManageCourseController controller = loader.getController();
+        controller.courseDisplay(loggedInUser);
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
@@ -112,7 +98,14 @@ public class StudentManageCourseController implements Initializable {
     }
 
     public void switchToScholarshipFacilities(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("stud_scholarship_facilities.fxml"));
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_scholarship_facilities.fxml"));
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        ScholarshipFacilitiesController controller = loader.getController();
+        controller.scholarshipDisplay(loggedInUser);
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
@@ -128,7 +121,14 @@ public class StudentManageCourseController implements Initializable {
     }
 
     public void switchToStudentInformation(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("stud_info.fxml"));
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_info.fxml"));
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        StudInfoController controller = loader.getController();
+        controller.studInfoController(loggedInUser);
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);
@@ -177,7 +177,6 @@ public class StudentManageCourseController implements Initializable {
         courseColumn.setCellValueFactory(new PropertyValueFactory<>("courseName"));
         MOSColumn.setCellValueFactory(new PropertyValueFactory<>("mediumStudy"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("feeStructure"));
-
     }
 
     // add course into tableview

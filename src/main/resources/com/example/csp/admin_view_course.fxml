@@ -31,10 +31,10 @@
         </Label>
         <AnchorPane layoutX="330.0" layoutY="29.0">
             <children>
-                <Button fx:id="btn_add_course" layoutX="60.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="120.0" style="-fx-background-color: #6CA74B;" text="ADD COURSE" textFill="WHITE" />
-                <Button fx:id="btn_update_course" layoutX="194.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="120.0" style="-fx-background-color: #6CA74B;" text="UPDATE COURSE" textFill="WHITE" />
-                <Button fx:id="btn_delete_course" layoutX="327.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="120.0" style="-fx-background-color: #6CA74B;" text="DELETE COURSE" textFill="WHITE" />
-                <Button fx:id="btn_view_course" layoutX="459.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="120.0" style="-fx-background-color: #6CA74B;" text="VIEW COURSE" textFill="WHITE" />
+                <Button fx:id="btn_add_course" layoutX="60.0" mnemonicParsing="false" onAction="#switchToAddCourse" prefHeight="20.0" prefWidth="120.0" style="-fx-background-color: #6CA74B;" text="ADD COURSE" textFill="WHITE" />
+                <Button fx:id="btn_update_course" layoutX="194.0" mnemonicParsing="false" onAction="#switchToUpdateCourse" prefHeight="20.0" prefWidth="120.0" style="-fx-background-color: #6CA74B;" text="UPDATE COURSE" textFill="WHITE" />
+                <Button fx:id="btn_delete_course" layoutX="327.0" mnemonicParsing="false" onAction="#switchToDeleteCourse" prefHeight="20.0" prefWidth="120.0" style="-fx-background-color: #6CA74B;" text="DELETE COURSE" textFill="WHITE" />
+                <Button fx:id="btn_view_course" layoutX="459.0" mnemonicParsing="false" onAction="#switchToViewCourse" prefHeight="20.0" prefWidth="120.0" style="-fx-background-color: #6CA74B;" text="VIEW COURSE" textFill="WHITE" />
             </children>
         </AnchorPane>
       <Pane layoutX="74.0" layoutY="115.0" prefHeight="342.0" prefWidth="812.0" style="-fx-background-color: #DDDDDD; -fx-background-radius: 10;">
@@ -147,23 +147,23 @@
                      </font>
                   </Label>
                   <Label text=":" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-                  <Label fx:id="label_courseId" text="Label" GridPane.columnIndex="2" />
-                  <Label fx:id="label_courseName2" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Label fx:id="label_feeStructure" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Label fx:id="label_maxStud" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                  <Label fx:id="label_medStudy" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                  <Label fx:id="label_fac" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                  <Label fx:id="label_courseDuration" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                  <Label fx:id="label_subjTaught" text="Label" GridPane.columnIndex="5" />
-                  <Label fx:id="label_EO" text="Label" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                  <Label fx:id="label_scholarship" text="Label" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-                  <Label fx:id="label_furtherStudies" text="Label" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+                  <Label fx:id="label_courseId" text="CS101" GridPane.columnIndex="2" />
+                  <Label fx:id="label_courseName2" text="Computer Science" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Label fx:id="label_feeStructure" text="30000" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Label fx:id="label_maxStud" text="1200" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Label fx:id="label_medStudy" text="DIPLOMA, UNDERGRADUATE, POSTGRADUATE" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                  <Label fx:id="label_fac" text="Computer Science" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <Label fx:id="label_courseDuration" text="3 Years" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                  <Label fx:id="label_subjTaught" text="Computer Architecture and Organization, Computer Networks, Database Systems, Software Engineering, Web Development, Artificial Intelligence" wrapText="true" GridPane.columnIndex="5" />
+                  <Label fx:id="label_EO" text="Software Developer, Web Designer" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                  <Label fx:id="label_scholarship" text="AVAILABLE" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                  <Label fx:id="label_furtherStudies" text="AVAILABLE" GridPane.columnIndex="5" GridPane.rowIndex="6" />
                </children>
             </GridPane>
-            <Line endX="555.0" layoutX="77.0" layoutY="21.0" startX="59.000030517578125" stroke="#ffffffd7" strokeWidth="3.0" />
+            <Line endX="735.0" layoutX="77.0" layoutY="21.0" startX="-84.80000305175781" stroke="#ffffffd7" strokeWidth="3.0" />
          </children></Pane>
         <Button layoutX="49.0" layoutY="476.0" mnemonicParsing="false" onAction="#logOut" text="LOGOUT" />
-      <Label fx:id="label_courseName" alignment="CENTER" layoutX="259.0" layoutY="102.0" prefHeight="26.0" prefWidth="441.0" text="Course Full Name Here" underline="true">
+      <Label fx:id="label_courseName" alignment="CENTER" layoutX="259.0" layoutY="102.0" prefHeight="26.0" prefWidth="441.0" text="Computer Science" underline="true">
          <font>
             <Font size="16.0" />
          </font>

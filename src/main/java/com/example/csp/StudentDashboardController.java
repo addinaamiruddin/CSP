@@ -109,7 +109,14 @@ public class StudentDashboardController {
 //        this.stage.show();
 //    }
     public void switchToCourseInfo(ActionEvent event) throws IOException {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("stud_add_course.fxml"));
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_add_course.fxml"));
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        StudentManageCourseController controller = loader.getController();
+        controller.courseDisplay(loggedInUser);
         this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         this.scene = new Scene(root);
         this.stage.setScene(this.scene);

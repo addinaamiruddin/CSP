@@ -52,14 +52,14 @@
                <children>
                   <AnchorPane>
                      <children>
-                        <Label prefHeight="62.0" prefWidth="224.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin scelerisque cursus odio eget finibus." textAlignment="JUSTIFY" wrapText="true" />
-                        <Label layoutX="165.0" layoutY="62.0" text="- John Doe" />
+                        <Label prefHeight="62.0" prefWidth="224.0" text="&quot;A well-structured course that covers the latest advancements in electrical and computer engineering.&quot;" textAlignment="JUSTIFY" wrapText="true" />
+                        <Label layoutX="165.0" layoutY="62.0" text="- Jake" />
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutY="98.0">
                      <children>
-                        <Label prefHeight="62.0" prefWidth="224.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin scelerisque cursus odio eget finibus." textAlignment="JUSTIFY" wrapText="true" />
-                        <Label layoutX="165.0" layoutY="62.0" text="- John Doe" />
+                        <Label prefHeight="62.0" prefWidth="224.0" text="&quot;A great course for anyone looking to gain a strong understanding of electrical and computer engineering principles.&quot;" textAlignment="JUSTIFY" wrapText="true" />
+                        <Label layoutX="165.0" layoutY="62.0" text="- Tina" />
                      </children>
                   </AnchorPane>
                </children>
@@ -94,14 +94,14 @@
                <children>
                   <AnchorPane>
                      <children>
-                        <Label prefHeight="62.0" prefWidth="224.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin scelerisque cursus odio eget finibus." textAlignment="JUSTIFY" wrapText="true" />
-                        <Label layoutX="165.0" layoutY="62.0" text="- John Doe" />
+                        <Label prefHeight="62.0" prefWidth="224.0" text="&quot;An in-depth and challenging course that provides a great foundation in computer science.&quot;" textAlignment="JUSTIFY" wrapText="true" />
+                        <Label layoutX="165.0" layoutY="62.0" text="- Mariah" />
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutY="98.0">
                      <children>
-                        <Label prefHeight="62.0" prefWidth="224.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin scelerisque cursus odio eget finibus." textAlignment="JUSTIFY" wrapText="true" />
-                        <Label layoutX="165.0" layoutY="62.0" text="- John Doe" />
+                        <Label prefHeight="62.0" prefWidth="224.0" text="&quot;A comprehensive and engaging course that covers a wide range of computer science topics.&quot;" textAlignment="JUSTIFY" wrapText="true" />
+                        <Label layoutX="165.0" layoutY="62.0" text="- Kevin" />
                      </children>
                   </AnchorPane>
                </children>
@@ -136,14 +136,14 @@
                <children>
                   <AnchorPane>
                      <children>
-                        <Label prefHeight="62.0" prefWidth="224.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin scelerisque cursus odio eget finibus." textAlignment="JUSTIFY" wrapText="true" />
-                        <Label layoutX="165.0" layoutY="62.0" text="- John Doe" />
+                        <Label prefHeight="62.0" prefWidth="224.0" text="&quot;A comprehensive and hands-on approach to learning civil engineering concepts.&quot;" textAlignment="JUSTIFY" wrapText="true" />
+                        <Label layoutX="165.0" layoutY="62.0" text="- Peter" />
                      </children>
                   </AnchorPane>
                   <AnchorPane layoutY="98.0">
                      <children>
-                        <Label prefHeight="62.0" prefWidth="224.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin scelerisque cursus odio eget finibus." textAlignment="JUSTIFY" wrapText="true" />
-                        <Label layoutX="165.0" layoutY="62.0" text="- John Doe" />
+                        <Label prefHeight="62.0" prefWidth="224.0" text="&quot;A challenging course that provides a solid foundation in civil engineering principles.&quot;" textAlignment="JUSTIFY" wrapText="true" />
+                        <Label layoutX="165.0" layoutY="62.0" text="- Amy" />
                      </children>
                   </AnchorPane>
                </children>

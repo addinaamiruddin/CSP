@@ -39,12 +39,7 @@ public class StudLoginController {
             System.out.println("helloUsername: " + student.getUsername() + ", Password: " + student.getPassword());
         }
 
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_dashboard.fxml"));
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+
 
         // check if student is exist
 //        for (Student student : Student.listOfStudents) {
@@ -61,8 +56,15 @@ public class StudLoginController {
 //        }
         AddressInfo sampleAddress = new AddressInfo("Street", "City", "State", "25300", "Country");
 
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("stud_dashboard.fxml"));
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         if (authenticate(inpUser, inpPass)) {
-            Student loggedInUser = Student.getInstance("student", "testing", "emailAddress", 123, sampleAddress);
+            Student loggedInUser = Student.getInstance("John Doe", "testing", "emailAddress@gmail.com", 123, sampleAddress);
             StudentDashboardController SDC = loader.getController();
             SDC.dashboardController(loggedInUser);
         } else {
