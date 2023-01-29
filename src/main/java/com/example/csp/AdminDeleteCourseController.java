@@ -36,6 +36,7 @@ public class AdminDeleteCourseController implements Initializable {
     @FXML
     private TableColumn<Course, Faculty> facColumn;
     private User loggedInUser;
+    @FXML
     private Label label_faculty_name;
     private ObservableList<Course> courses;
     @FXML

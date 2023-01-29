@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.media.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csp.VideoController">
+    <children>
+        <MediaView fx:id="mediaView" fitHeight="300.0" fitWidth="500.0" layoutX="50.0" />
+        <Button fx:id="pauseButton" layoutX="236.0" layoutY="314.0" mnemonicParsing="false" onAction="#playVideoCS" text="COMPUTER SCIENCE" />
+        <Button fx:id="playButton" layoutX="30.0" layoutY="314.0" mnemonicParsing="false" onAction="#playVideoEE" text="ELECTRICAL ENGINEERING" />
+        <Button fx:id="resetButton" layoutX="393.0" layoutY="314.0" mnemonicParsing="false" onAction="#playVideoME" text="MECHANICAL ENGINEERING" />
+      <Button fx:id="pauseButton1" layoutX="136.0" layoutY="349.0" mnemonicParsing="false" onAction="#playVideoCE" text="CIVIL ENGINEERING" />
+      <Button fx:id="pauseButton11" layoutX="290.0" layoutY="349.0" mnemonicParsing="false" onAction="#playVideoECE" text="ELECTRICAL AND COMPUTER ENGINEERING" />
+    </children>
+</AnchorPane>

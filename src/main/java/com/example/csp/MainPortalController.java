@@ -7,9 +7,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URI;
+
 
 public class MainPortalController {
     private Stage stage;
@@ -48,4 +51,21 @@ public class MainPortalController {
         this.stage.show();
     }
 
+    public void toVideo(ActionEvent event) {
+
+        //Create Stage
+        Stage newWindow = new Stage();
+        newWindow.setTitle("VIDEO BRIEFING");
+        //Create view in Java
+        Parent root = null;
+        try {
+            root = (Parent) FXMLLoader.load(this.getClass().getResource("view_video.fxml"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        //Set view in window
+        newWindow.setScene(new Scene(root));
+        //Launch
+        newWindow.show();
+    }
 }
